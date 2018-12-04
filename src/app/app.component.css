@@ -1,0 +1,14 @@
+.content__date-selector {
+
+}
+
+
+.header {
+  padding: 60px 40px 20px 40px;
+  background-color: lightgrey;
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+}

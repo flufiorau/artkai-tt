@@ -1,0 +1,9 @@
+.date-selector__button {
+  min-width: 20px;
+  min-height: 20px;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 10px;
+}

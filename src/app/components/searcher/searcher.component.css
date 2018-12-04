@@ -1,0 +1,17 @@
+.input__clear {
+  position: absolute;
+  right: 0;
+  font-size: 12px;
+  padding: 4px;
+}
+
+.actions-bar__search-input {
+  width: 220px;
+  padding: 5px 20px 5px 5px;
+  border: 0;
+
+}
+
+.actions-bar__searcher{
+  position: relative;
+}
