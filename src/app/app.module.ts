@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CalendarModule} from './core/calendar.module';
 
@@ -9,7 +9,9 @@ import {CalendarModule} from './core/calendar.module';
     BrowserModule,
     CalendarModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'ru-UA' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

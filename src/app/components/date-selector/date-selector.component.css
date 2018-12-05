@@ -1,9 +1,24 @@
 .date-selector__button {
-  min-width: 20px;
-  min-height: 20px;
-  padding: 5px;
   background-color: white;
   border: 1px solid gray;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 2px;
+  font-size: 10px;
+  line-height: 0;
+  margin: 10px 3px;
+  min-width: 13px;
+  height: 13px;
+}
+
+.date-selector {
+  padding-left: 35px;
+  padding-top: 2px;
+}
+
+.date-selector__selected-year-and-month {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.button_current-date {
+  padding: 0 4px;
 }

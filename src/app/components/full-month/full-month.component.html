@@ -1,0 +1,11 @@
+<table class="table">
+  <!--<tr>-->
+    <!--<th *ngFor="let c of columns">{{c}}</th>-->
+  <!--</tr>-->
+
+  <app-table-row *ngFor="let ch of calendarDataSource; let first = first;" style="display: table-row"
+                 [cellData]="ch"
+                 [firstRow]="first"
+                 [columns]="columns"></app-table-row>
+
+</table>

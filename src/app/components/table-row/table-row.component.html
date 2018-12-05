@@ -1,0 +1,7 @@
+<td *ngFor="let col of columns" class="table-cell">
+  <ng-container *ngIf="firstRow">
+    <p>{{cellData[col] | date: 'EEEE, d'}}</p>
+  </ng-container>
+  <ng-container *ngIf="!firstRow">{{cellData[col] | date: 'd'}}</ng-container>
+</td>
+

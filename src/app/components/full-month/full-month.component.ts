@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CalendarService} from '../../core/calendar.service';
+import {Week} from '../../core/interfaces';
 
 @Component({
   selector: 'app-full-month',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullMonthComponent implements OnInit {
 
-  constructor() { }
+  columns = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  calendarDataSource: Week[];
+
+  constructor(private calendarService: CalendarService) {
+  }
 
   ngOnInit() {
+    this.calendarService.getCalendar().subscribe(
+      (calendarForView) => this.calendarDataSource = calendarForView
+    );
+    console.log(this.calendarDataSource);
   }
 
 }

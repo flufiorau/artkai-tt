@@ -8,6 +8,11 @@ import {FullMonthComponent} from '../components/full-month/full-month.component'
 import {OneDayComponent} from '../components/one-day/one-day.component';
 import {SearcherComponent} from '../components/searcher/searcher.component';
 import {SearchAutocompleteItemComponent} from '../components/search-autocomplete-item/search-autocomplete-item.component';
+import {TableRowComponent} from '../components/table-row/table-row.component';
+import {registerLocaleData} from '@angular/common';
+import localeUa from '@angular/common/locales/ru-UA';
+
+registerLocaleData(localeUa, 'ru-UA');
 
 @NgModule({
   declarations: [
@@ -17,7 +22,8 @@ import {SearchAutocompleteItemComponent} from '../components/search-autocomplete
     FullMonthComponent,
     OneDayComponent,
     SearcherComponent,
-    SearchAutocompleteItemComponent
+    SearchAutocompleteItemComponent,
+    TableRowComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,8 @@ import {SearchAutocompleteItemComponent} from '../components/search-autocomplete
     FullMonthComponent,
     OneDayComponent,
     SearcherComponent,
-    SearchAutocompleteItemComponent
+    SearchAutocompleteItemComponent,
+    TableRowComponent
   ]
 })
 export class CalendarModule {

@@ -2,3 +2,15 @@
   padding: 0;
   margin: 0;
 }
+
+body {
+  background-image: url('assets/bcgrnd.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+
+}
+
+.app-calendar {
+  width: 800px;
+  margin: auto;
+}

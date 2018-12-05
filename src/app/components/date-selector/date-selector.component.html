@@ -1,4 +1,9 @@
-<button class="date-selector__button button_previous-month"> <</button>
-<span class="date-selector__selected-year-and-month">March, 2018</span>
-<button class="date-selector__button button_next-month"> ></button>
-<button class="date-selector__button button_current-date">today</button>
+<div class="date-selector">
+  <button class="date-selector__button button_previous-month"
+  (click)="loadPreviousMonth()">◀</button>
+  <span class="date-selector__selected-year-and-month">{{selectedMonth | date: 'MMM'}} {{selectedYear}}</span>
+  <button class="date-selector__button button_next-month"
+  (click)="loadNextMonth()">▶</button>
+  <button class="date-selector__button button_current-date"
+  (click)="loadMonthWithCurrentDay()">Сегодня</button>
+</div>
