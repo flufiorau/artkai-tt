@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Week} from './interfaces';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class CalendarService {
   calendarStartDate = new Date();
   calendarEndDate = new Date();
   oneDayInMilliseconds = 86400000;
-  calendarForView: Week[];
+  calendarForView = new BehaviorSubject<Week[]>([]);
 
   constructor() {
   }
@@ -19,24 +19,26 @@ export class CalendarService {
   setCalendarStartDate(date) {
     const countDaysFromMonday = (new Date(date).getDay() - 1) * this.oneDayInMilliseconds;
     this.calendarStartDate = new Date(date - countDaysFromMonday);
-    console.log('calendarStartDate --> ', this.calendarStartDate);
   }
 
   setCalendarEndDate(date) {
-    const countDaysFromSunday = (7 - new Date(date).getDay()) * this.oneDayInMilliseconds;
-    this.calendarEndDate = new Date(date + countDaysFromSunday);
+    if (new Date(date).getDay() !== 0) {
+      const countDaysFromSunday = (7 - new Date(date).getDay()) * this.oneDayInMilliseconds;
+      this.calendarEndDate = new Date(date + countDaysFromSunday);
+    } else {
+      this.calendarEndDate = new Date(date);
+    }
     this.calendarEndDate.setMilliseconds(999);
     this.calendarEndDate.setSeconds(59);
     this.calendarEndDate.setMinutes(59);
     this.calendarEndDate.setHours(23);
-    console.log('calendarEndDate --> ', this.calendarEndDate);
   }
 
   createCalendarTableDataSource() {
-    this.calendarForView = [];
-    console.log(this.calendarForView);
+    this.calendarForView.next([]);
     const calendar = [];
-    const weeksInMonth = ((this.calendarEndDate.getTime() + 1) - this.calendarStartDate.getTime()) / this.oneDayInMilliseconds;
+    const daysInMonth = ((this.calendarEndDate.getTime() + 1) - this.calendarStartDate.getTime()) / this.oneDayInMilliseconds;
+    const weeksInMonth = parseFloat((daysInMonth / 7).toFixed(0));
     let anyDate = this.calendarStartDate.getTime();
     let oneWeek = new Week();
     for (let i = 0; i < weeksInMonth; i++) {
@@ -71,11 +73,6 @@ export class CalendarService {
         oneWeek = new Week();
       }
     }
-    this.calendarForView = calendar;
-    this.getCalendar();
-  }
-
-  getCalendar(): Observable<Week[]> {
-    return of(this.calendarForView);
+    this.calendarForView.next(calendar);
   }
 }

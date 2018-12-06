@@ -15,8 +15,11 @@
 }
 
 .date-selector__selected-year-and-month {
+  display: inline-block;
   font-size: 12px;
   font-weight: 600;
+  text-align: center;
+  min-width: 80px;
 }
 
 .button_current-date {
