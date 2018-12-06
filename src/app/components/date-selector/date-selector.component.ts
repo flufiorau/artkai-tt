@@ -20,9 +20,9 @@ export class DateSelectorComponent implements OnInit {
   }
 
   getMonthAndYear(year, month) {
-    this.calendarService.setCalendarStartDate(new Date(year, month).getTime());
-    this.calendarService.setCalendarEndDate(new Date(year, month + 1, 0).getTime());
     this.getMonthName(month);
+    this.calendarService.setCalendarStartDate(new Date(year, month));
+    this.calendarService.setCalendarEndDate(new Date(year, month + 1, 0));
     this.calendarService.createCalendarTableDataSource();
   }
 
