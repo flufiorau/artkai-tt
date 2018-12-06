@@ -1,12 +1,13 @@
-export interface Task {
+export interface CalendarEvent {
   date: number;
   description: string;
   members: string[];
+  editFlag?: boolean;
 }
 
 export interface Day {
   unixDate: number;
-  tasks: Task[];
+  event: CalendarEvent;
 }
 
 export class Week {

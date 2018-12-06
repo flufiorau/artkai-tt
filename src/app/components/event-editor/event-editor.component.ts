@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CalendarEvent} from '../../core/interfaces';
 
 @Component({
   selector: 'app-event-editor',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventEditorComponent implements OnInit {
 
-  constructor() { }
+  @Input() dateFromCell: Date;
+  @Input() calendarEvent: CalendarEvent;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  addNewEventToBase() {
+
+  }
+
+  deleteCurrentEvent() {
+
+  }
 }
