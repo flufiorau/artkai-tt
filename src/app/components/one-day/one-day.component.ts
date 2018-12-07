@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CalendarEvent} from '../../core/interfaces';
+import {CalendarService} from '../../core/calendar.service';
 
 @Component({
   selector: 'app-one-day',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OneDayComponent implements OnInit {
 
-  constructor() { }
+  @Input() firstWeekFlag: boolean;
+  @Input() thisDay: Date;
+  @Input() weekNumber: number;
 
-  ngOnInit() {
+  calendarEvent: CalendarEvent = {
+    date: 21132131232,
+    description: 'qwerty qwerty qwerty qwerty ',
+    members: ['saSAsASa', 'zxczx']
+  };
+
+  userClickedByDay: boolean;
+  private selectedDayForEditEvent: Date;
+
+  constructor(public calendarService: CalendarService) {
   }
 
+
+  ngOnInit() {
+    this.calendarService.selectedDayForEditEvent.subscribe((selectedDay: Date) => {
+      this.selectedDayForEditEvent = selectedDay;
+    });
+  }
+
+  onClicked(day) {
+    this.calendarService.selectedDayForEditEvent.next(day);
+  }
 }

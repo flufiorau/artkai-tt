@@ -1,11 +1,4 @@
-<td *ngFor="let col of columns" class="table-cell" (click)="calendarEvent.editFlag = !calendarEvent.editFlag">
-  <ng-container *ngIf="firstRow">
-    <p>{{cellData[col] | date: 'EEEE, d'}}</p>
-  </ng-container>
-  <ng-container *ngIf="!firstRow">{{cellData[col] | date: 'd'}}</ng-container>
-  <app-event-editor *ngIf="calendarEvent.editFlag"
-    [dateFromCell]="cellData[col]"
-    [calendarEvent]="calendarEvent"
-  ></app-event-editor>
+<td *ngFor="let day of columns">
+  <app-one-day [firstWeekFlag]="firstRow" [thisDay]="oneWeekData[day]" [weekNumber]="weekNumber"></app-one-day>
 </td>
 

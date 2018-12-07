@@ -16,8 +16,8 @@ export class FullMonthComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.calendarService.calendarForView.subscribe((array: Week[]) => {
-      this.calendarDataSource = array;
+    this.calendarService.calendarForView.subscribe((calendarArray: Week[]) => {
+      this.calendarDataSource = calendarArray;
     });
   }
 }

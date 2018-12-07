@@ -1,11 +1,23 @@
-<div class="event-editor">
+<div [class.event-editor__block_reverse-position]="revertCSSPosition"
+     [class.event-editor__block_upper-position]="upperCSSPosition"
+     [class.event-editor__block]="!revertCSSPosition && !revertCSSPosition">
   <form (submit)="addNewEventToBase()">
-    <input type="text" [value]="event.date">
-    <input type="text" [value]="event.description">
-    <input type="text" [value]="event.date">
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Добавить</button>
-    <button type="button" (click)="deleteCurrentEvent()">Удалить</button>
+    <label>
+      <input type="text" class="event-editor__input input" [value]="calendarEvent.date">
+    </label>
+    <label>
+      <input type="text" class="event-editor__input input" [value]="calendarEvent.description">
+    </label>
+    <label>
+      <input type="text" class="event-editor__input input" [value]="calendarEvent.date">
+    </label>
+    <label>
+      <textarea class="event-editor__textarea textarea"></textarea>
+    </label>
+    <button type="submit" class="event-editor__button button">Готово</button>
+    <button type="button" class="event-editor__button button"
+            (click)="deleteCurrentEvent()">Удалить
+    </button>
   </form>
 </div>
 

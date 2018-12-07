@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CalendarEvent} from '../../core/interfaces';
+import {Week} from '../../core/interfaces';
 
 @Component({
   selector: 'app-table-row',
@@ -8,15 +8,10 @@ import {CalendarEvent} from '../../core/interfaces';
 })
 export class TableRowComponent implements OnInit {
 
-  @Input() cellData: any;
+  @Input() oneWeekData: Week;
   @Input() columns: string[];
   @Input() firstRow: boolean;
-
-  calendarEvent: CalendarEvent = {
-      date: 21132131232,
-      description: 'qwerty qwerty qwerty qwerty ',
-      members: ['saSAsASa', 'zxczx']};
-  userClickedByDay: boolean;
+  @Input() weekNumber: number;
 
   constructor() {
   }

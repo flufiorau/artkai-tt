@@ -1,6 +1,7 @@
-<table class="table">
-  <app-table-row *ngFor="let ch of calendarDataSource; let first = first;" style="display: table-row"
-                 [cellData]="ch"
+<table class="table" tabindex="1">
+  <app-table-row *ngFor="let week of calendarDataSource; let first = first; let weekNumber = index" style="display: table-row"
+                 [oneWeekData]="week"
                  [firstRow]="first"
+                 [weekNumber]="weekNumber"
                  [columns]="columns"></app-table-row>
 </table>

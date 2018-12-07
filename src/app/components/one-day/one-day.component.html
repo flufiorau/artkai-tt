@@ -1,3 +1,15 @@
-<p>
-  one-day works!
-</p>
+<td class="one-day" (click)="this.userClickedByDay = true; onClicked(thisDay)">
+  <ng-container *ngIf="firstWeekFlag">
+    <p>{{thisDay | date: 'EEEE, d'}}</p>
+  </ng-container>
+  <ng-container *ngIf="!firstWeekFlag">
+    {{thisDay | date: 'd'}}</ng-container>
+  <div class="event-editor" *ngIf="userClickedByDay && selectedDayForEditEvent === thisDay">
+    <app-event-editor
+      [dateFromCell]="thisDay"
+      [calendarEvent]="calendarEvent"
+      [weekNumber]="weekNumber"></app-event-editor>
+  </div>
+</td>
+
+

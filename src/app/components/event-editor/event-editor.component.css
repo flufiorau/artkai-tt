@@ -1,0 +1,92 @@
+.event-editor__block,
+.event-editor__block_reverse-position,
+.event-editor__block_upper-position {
+  background: rgba(254, 255, 231, .3);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  height: 230px;
+  position: absolute;
+  padding: 18px 22px 18px 17px;
+  width: 208px;
+}
+
+.event-editor__block {
+  left: 105px;
+  top: -32px;
+}
+
+.event-editor__block_reverse-position {
+  right: 107px;
+  left: unset;
+}
+
+.event-editor__block_upper-position {
+  top: unset;
+  bottom: -35px;
+}
+
+.event-editor__block::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 15px;
+  border: 10px solid transparent;
+  border-right: 10px solid white;
+}
+
+.event-editor__block_reverse-position::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  left: unset;
+  top: 15px;
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+}
+
+.event-editor__block_upper-position::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 225px;
+  border: 10px solid transparent;
+  border-right: 10px solid white;
+}
+
+.event-editor__block_reverse-position.event-editor__block_upper-position::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  left: unset;
+  top: 225px;
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+}
+
+.event-editor__button {
+  background-color: transparent;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+.event-editor__textarea,
+.event-editor__input {
+  background: transparent;
+  width: 100%;
+}
+
+.input {
+  margin-bottom: 8px;
+}
+
+.textarea {
+  margin: 20px 0;
+  height: 90px;
+  resize: none;
+}
+
+.button {
+  margin: 0 3px;
+  width: 45px;
+  border-radius: 4px;
+}

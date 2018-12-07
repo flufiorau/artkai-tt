@@ -1,12 +1,4 @@
 .table-cell {
-  border: 1px solid lightgray;
-  font-size: 10px;
-  height: 85px;
-  padding: 4px;
-  width: 94px;
-}
-
-p::first-letter {
-  text-transform: uppercase;
+  display: table-cell;
 }
 

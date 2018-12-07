@@ -10,8 +10,8 @@ export class CalendarService {
 
   calendarStartDate: Date;
   calendarEndDate: Date;
-  // oneDayInMilliseconds = 86400000;
   calendarForView = new BehaviorSubject<Week[]>([]);
+  selectedDayForEditEvent = new BehaviorSubject<Date>(new Date);
 
   constructor() {
   }
@@ -34,7 +34,6 @@ export class CalendarService {
     this.calendarForView.next([]);
     const calendar = [];
     let anyDate = new Date(this.calendarStartDate.getTime());
-    let counter = 0;
 
     do {
       let oneWeek = new Week();
