@@ -1,17 +1,42 @@
-.event-editor__block,
-.event-editor__block_reverse-position,
-.event-editor__block_upper-position {
-  background: rgba(254, 255, 231, .3);
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  height: 230px;
+.event-editor__triangle {
+  color: white;
+  display: inline-block;
+  font-size: 25px;
+  line-height: 15px;
   position: absolute;
-  padding: 18px 22px 18px 17px;
-  width: 208px;
+  top: 25px;
+  left: -15px;
+  height: 10px;
+  width: 20px;
+  text-shadow: 3px 0 3px lightgrey;
+  transform: scale(1, 2) rotate(180deg);
+  -moz-transform: scale(1, 2) rotate(180deg);
+  -webkit-transform: scale(1, 2) rotate(180deg);
+}
+
+.triangle_reverse-position {
+  left: unset;
+  right: -15px;
+  transform: scale(1, 2);
+  -moz-transform: scale(1, 2);
+  -webkit-transform: scale(1, 2);
+}
+
+.triangle_upper-position {
+  bottom: 20px;
+  top: unset;
+  right: -15px;
 }
 
 .event-editor__block {
   left: 105px;
   top: -32px;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 230px;
+  position: absolute;
+  padding: 18px 22px 18px 17px;
+  width: 208px;
 }
 
 .event-editor__block_reverse-position {
@@ -21,57 +46,20 @@
 
 .event-editor__block_upper-position {
   top: unset;
-  bottom: -35px;
-}
-
-.event-editor__block::after {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 15px;
-  border: 10px solid transparent;
-  border-right: 10px solid white;
-}
-
-.event-editor__block_reverse-position::after {
-  content: '';
-  position: absolute;
-  right: -20px;
-  left: unset;
-  top: 15px;
-  border: 10px solid transparent;
-  border-left: 10px solid white;
-}
-
-.event-editor__block_upper-position::after {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 225px;
-  border: 10px solid transparent;
-  border-right: 10px solid white;
-}
-
-.event-editor__block_reverse-position.event-editor__block_upper-position::after {
-  content: '';
-  position: absolute;
-  right: -20px;
-  left: unset;
-  top: 225px;
-  border: 10px solid transparent;
-  border-left: 10px solid white;
+  bottom: -70px;
 }
 
 .event-editor__button {
-  background-color: transparent;
-  font-size: 9px;
-  font-weight: 600;
+  background-color: rgba(255, 255, 255, .7);
+  font-size: 8px;
+  font-weight: 800;
+  font-family: Verdana, sans-serif;
 }
 
 
 .event-editor__textarea,
 .event-editor__input {
-  background: transparent;
+  background: rgba(255, 255, 255, .7);
   width: 100%;
 }
 
