@@ -1,3 +1,32 @@
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(85,85,85,.7);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.searcher__triangle {
+  color: white;
+  display: inline-block;
+  font-size: 10px;
+  line-height: 10px;
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  height: 10px;
+  width: 10px;
+  text-shadow: 0 -3px 3px rgba(211,211,211,1);
+  transform: scale(2, 1);
+  -moz-transform: scale(2, 1);
+  -webkit-transform: scale(2, 1);
+}
+
 .input__clear {
   font-size: 8px;
   font-weight: bold;
@@ -20,41 +49,21 @@
   font-weight: 600;;
 }
 
-.actions-bar__searcher{
+.actions-bar__searcher {
   position: relative;
 }
 
 .searcher__autocomplete {
   background-color: white;
-  height: 100px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 5px;
   position: absolute;
   left: 18px;
   top: 37px;
-  width: 171px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5)
-  /*box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, 0.3);*/
 }
 
-.searcher__autocomplete::after {
-  border: 10px solid rgba(255,255,255,.7);
-  border-bottom: 10px solid white;
-  content: '';
-  position: absolute;
-  left: 14px;
-  top: -18px;
+.searcher__results {
+  max-height: 315px;
+  width: 160px;
+  overflow-y: scroll;
 }
-
-/*.searcher__autocomplete {*/
-  /*background: green;*/
-  /*border-radius: 10px;*/
-  /*padding: 20px;*/
-  /*position: relative;*/
-  /*color: #fff;*/
-/*}*/
-/*.searcher__autocomplete::after {*/
-  /*content: '';*/
-  /*position: absolute; !* Абсолютное позиционирование *!*/
-  /*left: 20px; bottom: -20px; !* Положение треугольника *!*/
-  /*border: 10px solid rgba(255,255,255,.7); !* Прозрачные границы *!*/
-  /*border-top: 10px solid green; !* Добавляем треугольник *!*/
-/*}*/

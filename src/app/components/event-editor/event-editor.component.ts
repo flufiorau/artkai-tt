@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CalendarEvent} from '../../core/interfaces';
 
 @Component({
@@ -10,6 +10,7 @@ export class EventEditorComponent implements OnInit {
 
   @Input() dateFromCell: Date;
   @Input() calendarEvent: CalendarEvent;
+  @Output() closeEventEditor = new EventEmitter<boolean>();
   @Input() weekNumber: number;
   revertCSSPosition: boolean;
   upperCSSPosition: boolean;
@@ -18,13 +19,7 @@ export class EventEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.dateFromCell.getDay() > 4 || this.dateFromCell.getDay() === 0) {
-      this.revertCSSPosition = true;
-    }
-    if (this.weekNumber > 3) {
-      console.log(this.weekNumber);
-      this.upperCSSPosition = true;
-    }
+    this.editXYPositionBlock();
   }
 
   addNewEventToBase() {
@@ -33,5 +28,18 @@ export class EventEditorComponent implements OnInit {
 
   deleteCurrentEvent() {
 
+  }
+
+  closeEventEditorForm() {
+    this.closeEventEditor.emit();
+  }
+
+  private editXYPositionBlock() {
+    if (this.dateFromCell.getDay() > 4 || this.dateFromCell.getDay() === 0) {
+      this.revertCSSPosition = true;
+    }
+    if (this.weekNumber > 3) {
+      this.upperCSSPosition = true;
+    }
   }
 }

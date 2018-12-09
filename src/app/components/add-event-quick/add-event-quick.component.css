@@ -1,11 +1,53 @@
+.add-event-quick__button {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 800;
+  width: 50px;
+}
+
+
 .button {
-  background-color: rgba(0,94,197,.7);
-  border: 1px solid rgba(0,94,197,.2);
+  background-color: rgba(0, 94, 197, .7);
+  border: 1px solid rgba(0, 94, 197, .2);
   border-radius: 2px;
   color: #ffffff;
   font-size: 10px;
   font-weight: bold;
   margin-right: 6px;
-  padding: 6px 4px;
+  padding: 4px;
   width: 66px;
+}
+
+.add-event-quick__triangle {
+  color: white;
+  display: inline-block;
+  font-size: 10px;
+  line-height: 10px;
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  height: 10px;
+  width: 10px;
+  text-shadow: 0 -3px 3px lightgrey;
+  transform: scale(2, 1);
+  -moz-transform: scale(2, 1);
+  -webkit-transform: scale(2, 1);
+}
+
+.add-event-quick__input {
+  font-size: 8px;
+  margin-bottom: 10px;
+  padding: 4px;
+  width: 100%;
+}
+
+.add-event-quick {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 19px 25px 15px 17px;
+  position: absolute;
+  top: 75px;
+  width: 200px;
 }

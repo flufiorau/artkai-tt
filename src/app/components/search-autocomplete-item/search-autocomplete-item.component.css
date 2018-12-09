@@ -1,0 +1,21 @@
+.calendar-event {
+  font-family: Verdana, sans-serif;
+  padding: 0 5px;
+  height: 36px;
+  border-bottom: 2px solid rgba(211,211,211,.7);;
+}
+
+.calendar-event__description {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 3px 0;
+  text-overflow: ellipsis;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.calendar-event__date {
+  font-size: 8px;
+  padding: 2px 0;
+}
+

@@ -19,8 +19,8 @@ export class OneDayComponent implements OnInit {
     members: ['saSAsASa', 'zxczx']
   };
 
-  userClickedByDay: boolean;
-  private selectedDayForEditEvent: Date;
+  selectedDayForEditEvent: Date;
+  userClickedOnThisDay: boolean;
 
   constructor(public calendarService: CalendarService) {
   }
@@ -32,7 +32,16 @@ export class OneDayComponent implements OnInit {
     });
   }
 
-  onClicked(day) {
-    this.calendarService.selectedDayForEditEvent.next(day);
+  onClicked(thisDay) {
+    if (this.selectedDayForEditEvent === thisDay) {
+      this.calendarService.selectedDayForEditEvent.next(null);
+      this.userClickedOnThisDay = false;
+    }
+    this.userClickedOnThisDay = true;
+    this.calendarService.selectedDayForEditEvent.next(thisDay);
+  }
+
+  closeFunc() {
+    this.userClickedOnThisDay = false;
   }
 }

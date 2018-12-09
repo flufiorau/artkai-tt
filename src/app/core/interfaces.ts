@@ -1,8 +1,13 @@
-export interface CalendarEvent {
-  date: number;
+export class CalendarEvent {
+  date: Date;
   description: string;
   members: string[];
   editFlag?: boolean;
+  constructor() {
+  this.date = new Date(0);
+  this.description = '';
+  this.members = [];
+}
 }
 
 export interface Day {

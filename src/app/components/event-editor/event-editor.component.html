@@ -5,20 +5,30 @@
         [class.triangle_reverse-position]="revertCSSPosition"
         [class.triangle_upper-position]="upperCSSPosition"
         [class.triangle]="!revertCSSPosition && !revertCSSPosition">▶</span>
+  <span class="event-editor__closer"
+  (click)="closeEventEditorForm()">+</span>
   <form (submit)="addNewEventToBase()">
     <label>
-      <input type="text" class="event-editor__input input" [value]="calendarEvent.date">
+      <input type="text" class="event-editor__input input"
+             [(ngModel)]="calendarEvent.date"
+             [ngModelOptions]="{standalone: true}">
     </label>
     <label>
-      <input type="text" class="event-editor__input input" [value]="calendarEvent.description">
+      <input type="text" class="event-editor__input input"
+             [(ngModel)]="calendarEvent.description"
+             [ngModelOptions]="{standalone: true}">
     </label>
     <label>
-      <input type="text" class="event-editor__input input" [value]="calendarEvent.date">
+      <input type="text" class="event-editor__input input"
+             [(ngModel)]="calendarEvent.date"
+             [ngModelOptions]="{standalone: true}">
     </label>
     <label>
       <textarea class="event-editor__textarea textarea"></textarea>
     </label>
-    <button type="submit" class="event-editor__button button">Готово</button>
+    <button type="submit" class="event-editor__button button"
+            (click)="addNewEventToBase()">Готово
+    </button>
     <button type="button" class="event-editor__button button"
             (click)="deleteCurrentEvent()">Удалить
     </button>

@@ -2,3 +2,13 @@
   <button class="button actions-bar__create-task">Добавить</button>
   <button class="button actions-bar__update-calendar">Обновить</button>
 </div>
+<div class="add-event-quick">
+  <span class="add-event-quick__triangle">🔺</span>
+  <input type="text" class="add-event-quick__input"
+         placeholder="5 Марта, 14:00, День Рождение"
+         [(ngModel)]="stringValuesNewCalendarEvent">
+  <button class="add-event-quick__button"
+          (click)="createNewCalendarEvent()"
+          [disabled]="inputTextIsNotValid">Создать
+  </button>
+</div>

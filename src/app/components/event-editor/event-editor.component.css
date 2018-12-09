@@ -1,3 +1,26 @@
+.event-editor__closer{
+  color: rgba(0,0,0,1);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 8px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 8px;
+  width: 8px;
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.event-editor__closer:hover {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .event-editor__triangle {
   color: white;
   display: inline-block;
@@ -29,14 +52,14 @@
 }
 
 .event-editor__block {
-  left: 105px;
-  top: -32px;
+  left: 111px;
+  top: -111px;
   background: rgba(255, 255, 255, .7);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  height: 230px;
+  height: 225px;
   position: absolute;
   padding: 18px 22px 18px 17px;
-  width: 208px;
+  width: 200px;
 }
 
 .event-editor__block_reverse-position {
@@ -46,7 +69,7 @@
 
 .event-editor__block_upper-position {
   top: unset;
-  bottom: -70px;
+  bottom: 10px;
 }
 
 .event-editor__button {
@@ -68,13 +91,13 @@
 }
 
 .textarea {
-  margin: 20px 0;
+  margin: 20px 0 11px 0;
   height: 90px;
   resize: none;
 }
 
 .button {
-  margin: 0 3px;
+  margin: 0 6px 0 0;
   width: 45px;
   border-radius: 4px;
 }

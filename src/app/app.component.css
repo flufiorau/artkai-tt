@@ -5,9 +5,9 @@
 
 
 .header {
-  padding: 40px 40px 13px 38px;
-  background-color: rgba(1,100,127,.2);
-  border-bottom: 2px solid gray;
+  padding: 43px 40px 13px 39px;
+  background-color: rgba(154, 154, 154, 0.2);
+  border-bottom: 2px solid rgba(154, 154, 154, 0.5);
 }
 
 .actions-bar {

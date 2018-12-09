@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CalendarEvent} from '../../core/interfaces';
 
 @Component({
   selector: 'app-search-autocomplete-item',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchAutocompleteItemComponent implements OnInit {
 
+  @Input() calendarEvent: CalendarEvent;
   constructor() { }
 
   ngOnInit() {

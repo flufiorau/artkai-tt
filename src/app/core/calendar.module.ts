@@ -11,6 +11,7 @@ import {SearchAutocompleteItemComponent} from '../components/search-autocomplete
 import {TableRowComponent} from '../components/table-row/table-row.component';
 import {registerLocaleData} from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
+import {FormsModule} from '@angular/forms';
 
 registerLocaleData(localeUa, 'ru-UA');
 
@@ -27,6 +28,7 @@ registerLocaleData(localeUa, 'ru-UA');
   ],
   imports: [
     CommonModule,
+    FormsModule
   ],
   providers: [
     CalendarService

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from '../../core/search.service';
+import {CalendarEvent} from '../../core/interfaces';
+
 
 @Component({
   selector: 'app-searcher',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearcherComponent implements OnInit {
 
-  constructor() { }
+  searchResults: CalendarEvent[];
+  searcher_input = '';
 
-  ngOnInit() {
+  constructor(private searchService: SearchService) {
   }
 
+  ngOnInit() {
+    this.searchService.searchDataSource.subscribe(
+      (searchDataSource: CalendarEvent[]) => this.searchResults = searchDataSource
+    );
+  }
+
+  searchEvents() {
+    this.searchService.getEventsFromBase(this.searcher_input.toLowerCase());
+  }
+
+  clearThis() {
+    this.searcher_input = '';
+    this.searchService.searchDataSource.next([]);
+  }
 }
