@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CalendarEvent} from '../../core/interfaces';
-import {CalendarService} from '../../core/calendar.service';
+import {CalendarEvent} from '@app/core/interfaces';
+import {CalendarService} from '@app/core/calendar.service';
 
 @Component({
   selector: 'app-one-day',
@@ -14,7 +14,7 @@ export class OneDayComponent implements OnInit {
   @Input() weekNumber: number;
 
   calendarEvent: CalendarEvent = {
-    date: 21132131232,
+    date: new Date(21132131232),
     description: 'qwerty qwerty qwerty qwerty ',
     members: ['saSAsASa', 'zxczx']
   };

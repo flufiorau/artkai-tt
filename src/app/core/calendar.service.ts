@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Week} from './interfaces';
+import {Week} from '@app/core/interfaces';
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable({

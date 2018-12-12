@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
-import {CalendarModule} from './core/calendar.module';
+import {AppComponent} from '@app/app.component';
+import {CalendarModule} from '@app/core/calendar.module';
 
 @NgModule({
   declarations: [AppComponent],

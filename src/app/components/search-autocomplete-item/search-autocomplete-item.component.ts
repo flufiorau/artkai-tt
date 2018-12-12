@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CalendarEvent} from '../../core/interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 
 @Component({
   selector: 'app-search-autocomplete-item',

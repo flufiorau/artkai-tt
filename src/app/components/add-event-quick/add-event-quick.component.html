@@ -1,12 +1,23 @@
 <div class="actions-bar__quick-task-buttons">
-  <button class="button actions-bar__create-task">Добавить</button>
+  <button class="button actions-bar__create-task"
+          [class.button_active]="quickAddEventDialogOpen"
+  (click)="quickAddEventDialogOpen = !quickAddEventDialogOpen">Добавить</button>
   <button class="button actions-bar__update-calendar">Обновить</button>
 </div>
-<div class="add-event-quick">
+<div class="add-event-quick"
+  *ngIf="quickAddEventDialogOpen">
   <span class="add-event-quick__triangle">🔺</span>
-  <input type="text" class="add-event-quick__input"
-         placeholder="5 Марта, 14:00, День Рождение"
-         [(ngModel)]="stringValuesNewCalendarEvent">
+  <label class="add-event-quick__label">
+    <sup class="label__errors" *ngIf="parseErrors; else labelPlaceholder">{{parseErrors}}</sup>
+    <ng-template #labelPlaceholder>
+      <sup class="label">{{label}}</sup>
+    </ng-template>
+    <input type="text" class="add-event-quick__input"
+           placeholder="5 Марта, 14:00, День Рождение"
+           (blur)="quickAddEventDialogOpen = false"
+           (input)="validateInputMask()"
+           [(ngModel)]="stringValuesNewCalendarEvent">
+  </label>
   <button class="add-event-quick__button"
           (click)="createNewCalendarEvent()"
           [disabled]="inputTextIsNotValid">Создать

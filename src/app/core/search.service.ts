@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {CalendarEvent} from './interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 
 @Injectable({
   providedIn: 'root'

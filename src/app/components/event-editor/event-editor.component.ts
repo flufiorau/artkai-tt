@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CalendarEvent} from '../../core/interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 
 @Component({
   selector: 'app-event-editor',

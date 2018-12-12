@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {SearchService} from '../../core/search.service';
-import {CalendarEvent} from '../../core/interfaces';
+import {SearchService} from '@app/core/search.service';
+import {CalendarEvent} from '@app/core/interfaces';
 
 
 @Component({

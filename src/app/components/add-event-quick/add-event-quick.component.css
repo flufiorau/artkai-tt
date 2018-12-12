@@ -1,15 +1,5 @@
-.add-event-quick__button {
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  background: transparent;
-  border-radius: 4px;
-  font-size: 8px;
-  font-weight: 800;
-  width: 50px;
-}
-
-
 .button {
-  background-color: rgba(0, 94, 197, .7);
+  background-color: rgba(0, 94, 197, 1);
   border: 1px solid rgba(0, 94, 197, .2);
   border-radius: 2px;
   color: #ffffff;
@@ -18,6 +8,34 @@
   margin-right: 6px;
   padding: 4px;
   width: 66px;
+}
+
+.button:hover,
+.button:active,
+.button_active {
+  background-color: rgba(0, 94, 197, .7);
+  border: 1px solid rgba(0, 15, 100, 1);
+}
+
+.label,
+.label__errors{
+  font-size: 7px;
+  position: absolute;
+  left: 18px;
+  top: 10px;
+}
+
+.label__errors{
+  color: rgba(255,0,0,.7);
+}
+
+.add-event-quick__button {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 800;
+  width: 50px;
 }
 
 .add-event-quick__triangle {
@@ -51,3 +69,4 @@
   top: 75px;
   width: 200px;
 }
+

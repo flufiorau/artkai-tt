@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CalendarService} from '../../core/calendar.service';
-import {Week} from '../../core/interfaces';
+import {CalendarService} from '@app/core/calendar.service';
+import {Week} from '@app/core/interfaces';
 
 @Component({
   selector: 'app-full-month',

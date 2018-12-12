@@ -1,17 +1,16 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CalendarService} from './calendar.service';
-import {AddEventQuickComponent} from '../components/add-event-quick/add-event-quick.component';
-import {DateSelectorComponent} from '../components/date-selector/date-selector.component';
-import {EventEditorComponent} from '../components/event-editor/event-editor.component';
-import {FullMonthComponent} from '../components/full-month/full-month.component';
-import {OneDayComponent} from '../components/one-day/one-day.component';
-import {SearcherComponent} from '../components/searcher/searcher.component';
-import {SearchAutocompleteItemComponent} from '../components/search-autocomplete-item/search-autocomplete-item.component';
-import {TableRowComponent} from '../components/table-row/table-row.component';
-import {registerLocaleData} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
 import {FormsModule} from '@angular/forms';
+import {CalendarService} from '@app/core/calendar.service';
+import {AddEventQuickComponent} from '@app/components/add-event-quick/add-event-quick.component';
+import {DateSelectorComponent} from '@app/components/date-selector/date-selector.component';
+import {EventEditorComponent} from '@app/components/event-editor/event-editor.component';
+import {FullMonthComponent} from '@app/components/full-month/full-month.component';
+import {OneDayComponent} from '@app/components/one-day/one-day.component';
+import {SearcherComponent} from '@app/components/searcher/searcher.component';
+import {SearchAutocompleteItemComponent} from '@app/components/search-autocomplete-item/search-autocomplete-item.component';
+import {OneWeekComponent} from '@app/components/one-week/one-week.component';
 
 registerLocaleData(localeUa, 'ru-UA');
 
@@ -24,7 +23,7 @@ registerLocaleData(localeUa, 'ru-UA');
     OneDayComponent,
     SearcherComponent,
     SearchAutocompleteItemComponent,
-    TableRowComponent
+    OneWeekComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +40,7 @@ registerLocaleData(localeUa, 'ru-UA');
     OneDayComponent,
     SearcherComponent,
     SearchAutocompleteItemComponent,
-    TableRowComponent
+    OneWeekComponent
   ]
 })
 export class CalendarModule {

@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Week} from '../../core/interfaces';
+import {Week} from '@app/core/interfaces';
 
 @Component({
-  selector: 'app-table-row',
-  templateUrl: './table-row.component.html',
-  styleUrls: ['./table-row.component.css']
+  selector: 'app-one-week',
+  templateUrl: './one-week.component.html',
+  styleUrls: ['./one-week.component.css']
 })
-export class TableRowComponent implements OnInit {
+export class OneWeekComponent implements OnInit {
 
   @Input() oneWeekData: Week;
   @Input() columns: string[];
