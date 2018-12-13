@@ -11,6 +11,11 @@ import {OneDayComponent} from '@app/components/one-day/one-day.component';
 import {SearcherComponent} from '@app/components/searcher/searcher.component';
 import {SearchAutocompleteItemComponent} from '@app/components/search-autocomplete-item/search-autocomplete-item.component';
 import {OneWeekComponent} from '@app/components/one-week/one-week.component';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '@env/environment';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {SearchService} from '@app/core/search.service';
+import {FirebaseService} from '@app/core/firebase.service';
 
 registerLocaleData(localeUa, 'ru-UA');
 
@@ -27,10 +32,14 @@ registerLocaleData(localeUa, 'ru-UA');
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
-    CalendarService
+    CalendarService,
+    SearchService,
+    FirebaseService
   ],
   exports: [
     AddEventQuickComponent,

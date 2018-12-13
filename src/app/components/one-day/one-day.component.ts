@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CalendarEvent} from '@app/core/interfaces';
+import {FireBaseEvent} from '@app/core/interfaces';
 import {CalendarService} from '@app/core/calendar.service';
 
 @Component({
@@ -13,11 +13,7 @@ export class OneDayComponent implements OnInit {
   @Input() thisDay: Date;
   @Input() weekNumber: number;
 
-  calendarEvent: CalendarEvent = {
-    date: new Date(21132131232),
-    description: 'qwerty qwerty qwerty qwerty ',
-    members: ['saSAsASa', 'zxczx']
-  };
+  calendarEvent: FireBaseEvent;
 
   selectedDayForEditEvent: Date;
   userClickedOnThisDay: boolean;
@@ -39,6 +35,7 @@ export class OneDayComponent implements OnInit {
     }
     this.userClickedOnThisDay = true;
     this.calendarService.selectedDayForEditEvent.next(thisDay);
+    this.calendarEvent = {date: undefined, eventName: '', members: []};
   }
 
   closeFunc() {

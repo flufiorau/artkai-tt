@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CalendarEvent} from '@app/core/interfaces';
+import {FireBaseEvent} from '@app/core/interfaces';
+import {FirebaseService} from '@app/core/firebase.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-event-editor',
@@ -9,13 +11,14 @@ import {CalendarEvent} from '@app/core/interfaces';
 export class EventEditorComponent implements OnInit {
 
   @Input() dateFromCell: Date;
-  @Input() calendarEvent: CalendarEvent;
+  @Input() calendarEvent: FireBaseEvent;
   @Output() closeEventEditor = new EventEmitter<boolean>();
   @Input() weekNumber: number;
   revertCSSPosition: boolean;
   upperCSSPosition: boolean;
+  public error: string;
 
-  constructor() {
+  constructor(private afs: FirebaseService) {
   }
 
   ngOnInit() {
@@ -23,7 +26,7 @@ export class EventEditorComponent implements OnInit {
   }
 
   addNewEventToBase() {
-
+    this.afs.addEvent(this.calendarEvent);
   }
 
   deleteCurrentEvent() {
@@ -41,5 +44,31 @@ export class EventEditorComponent implements OnInit {
     if (this.weekNumber > 3) {
       this.upperCSSPosition = true;
     }
+  }
+
+  validateInputDate(inputData: string) {
+    if (inputData.indexOf(',') === -1) {
+      return;
+    }
+    const inputSplitArray = inputData.split(',');
+
+    if (inputSplitArray.length !== 3) {
+      this.error = 'Ошибка формата даты: День, месяц, год';
+      return;
+    }
+    console.warn(this.error);
+    if (!moment(inputSplitArray[0], 'DD').isValid()) {
+      this.error = 'День не корректен';
+      return;
+    }
+    if (!moment(inputSplitArray[1], 'MM').isValid()) {
+      this.error = 'Месяц не корректен';
+      return;
+    }
+    if (!moment(inputSplitArray[2], 'YYYY').isValid()) {
+      this.error = 'Год не корректен';
+      return;
+    }
+    console.warn('not error');
   }
 }

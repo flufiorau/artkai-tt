@@ -7,7 +7,7 @@ import {CalendarModule} from '@app/core/calendar.module';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    CalendarModule
+    CalendarModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ru-UA' }

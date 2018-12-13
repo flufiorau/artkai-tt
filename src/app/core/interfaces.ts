@@ -10,6 +10,14 @@ export class CalendarEvent {
 }
 }
 
+export interface FireBaseEvent {
+  eventName: string;
+  id?: string;
+  date: Date;
+  description?: string;
+  members: string[];
+}
+
 export interface Day {
   unixDate: number;
   event: CalendarEvent;

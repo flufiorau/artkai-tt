@@ -10,21 +10,28 @@
   <form (submit)="addNewEventToBase()">
     <label>
       <input type="text" class="event-editor__input input"
+             placeholder="Событие"
+             [(ngModel)]="calendarEvent.eventName"
+             [ngModelOptions]="{standalone: true}">
+    </label>
+    <label>
+      <input type="text" class="event-editor__input input"
+             placeholder="День, месяц, год"
+             (input)="validateInputDate($event.srcElement.value)"
              [(ngModel)]="calendarEvent.date"
              [ngModelOptions]="{standalone: true}">
     </label>
     <label>
       <input type="text" class="event-editor__input input"
-             [(ngModel)]="calendarEvent.description"
+             placeholder="Участники"
+             [(ngModel)]="calendarEvent.members"
              [ngModelOptions]="{standalone: true}">
     </label>
     <label>
-      <input type="text" class="event-editor__input input"
-             [(ngModel)]="calendarEvent.date"
-             [ngModelOptions]="{standalone: true}">
-    </label>
-    <label>
-      <textarea class="event-editor__textarea textarea"></textarea>
+      <textarea class="event-editor__textarea textarea"
+                placeholder="Описание"
+                [(ngModel)]="calendarEvent.description"
+                [ngModelOptions]="{standalone: true}"></textarea>
     </label>
     <button type="submit" class="event-editor__button button"
             (click)="addNewEventToBase()">Готово
