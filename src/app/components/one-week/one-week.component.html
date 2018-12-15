@@ -1,3 +1,8 @@
 <td *ngFor="let day of columns" class="one-week__cell">
-  <app-one-day [firstWeekFlag]="firstRow" [thisDay]="oneWeekData[day]" [weekNumber]="weekNumber"></app-one-day>
+
+      <app-one-day [firstWeekFlag]="firstRow"
+                   [thisDay]="oneWeekData[day]"
+                   [weekNumber]="weekNumber"
+                   [events]="events"></app-one-day>
+
 </td>

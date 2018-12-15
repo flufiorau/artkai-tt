@@ -18,15 +18,15 @@
 }
 
 .label,
-.label__errors{
+.label__errors {
   font-size: 7px;
   position: absolute;
   left: 18px;
   top: 10px;
 }
 
-.label__errors{
-  color: rgba(255,0,0,.7);
+.label__errors {
+  color: rgba(255, 0, 0, .7);
 }
 
 .add-event-quick__button {

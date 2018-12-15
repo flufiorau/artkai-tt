@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, registerLocaleData} from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarService} from '@app/core/calendar.service';
 import {AddEventQuickComponent} from '@app/components/add-event-quick/add-event-quick.component';
 import {DateSelectorComponent} from '@app/components/date-selector/date-selector.component';
@@ -33,6 +33,7 @@ registerLocaleData(localeUa, 'ru-UA');
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

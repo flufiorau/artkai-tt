@@ -1,21 +1,28 @@
 export class CalendarEvent {
-  date: Date;
+  date: number;
   description: string;
   members: string[];
   editFlag?: boolean;
   constructor() {
-  this.date = new Date(0);
+  this.date = 0;
   this.description = '';
   this.members = [];
 }
 }
 
 export interface FireBaseEvent {
-  eventName: string;
+  title: string;
   id?: string;
-  date: Date;
+  date: number;
   description?: string;
   members: string[];
+}
+
+export interface CalendarEventFromForm {
+  title: string;
+  eventDate: number;
+  eventDescription?: string;
+  eventMembers?: string;
 }
 
 export interface Day {
@@ -24,21 +31,21 @@ export interface Day {
 }
 
 export class Week {
-  monday: Date;
-  tuesday: Date;
-  wednesday: Date;
-  thursday: Date;
-  friday: Date;
-  saturday: Date;
-  sunday: Date;
+  monday: number;
+  tuesday: number;
+  wednesday: number;
+  thursday: number;
+  friday: number;
+  saturday: number;
+  sunday: number;
 
   constructor() {
-    this.monday = new Date(0);
-    this.tuesday = new Date(0);
-    this.wednesday = new Date(0);
-    this.thursday = new Date(0);
-    this.friday = new Date(0);
-    this.saturday = new Date(0);
-    this.sunday = new Date(0);
+    this.monday = 0;
+    this.tuesday = 0;
+    this.wednesday = 0;
+    this.thursday = 0;
+    this.friday = 0;
+    this.saturday = 0;
+    this.sunday = 0;
   }
 }

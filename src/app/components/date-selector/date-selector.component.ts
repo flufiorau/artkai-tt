@@ -10,7 +10,7 @@ export class DateSelectorComponent implements OnInit {
 
   selectedYear: number;
   selectedMonth: number;
-  selectedMonthName: string;
+  selectedMonthTitle: string;
 
   constructor(private calendarService: CalendarService) {
   }
@@ -20,7 +20,7 @@ export class DateSelectorComponent implements OnInit {
   }
 
   getMonthAndYear(year, month) {
-    this.getMonthName(month);
+    this.getMonthTitle(month);
     this.calendarService.setCalendarStartDate(new Date(year, month));
     this.calendarService.setCalendarEndDate(new Date(year, month + 1, 0));
     this.calendarService.createCalendarTableDataSource();
@@ -53,24 +53,24 @@ export class DateSelectorComponent implements OnInit {
     this.getMonthAndYear(this.selectedYear, this.selectedMonth);
   }
 
-  private getMonthName(month: number) {
+  private getMonthTitle(month: number) {
     const monthArray = [
-      {value: 1, name: 'Январь'},
-      {value: 2, name: 'Февраль'},
-      {value: 3, name: 'Март'},
-      {value: 4, name: 'Апрель'},
-      {value: 5, name: 'Май'},
-      {value: 6, name: 'Июнь'},
-      {value: 7, name: 'Июль'},
-      {value: 8, name: 'Август'},
-      {value: 9, name: 'Сентябрь'},
-      {value: 10, name: 'Октябрь'},
-      {value: 11, name: 'Ноябрь'},
-      {value: 12, name: 'Декабрь'}
+      {value: 1, title: 'Январь'},
+      {value: 2, title: 'Февраль'},
+      {value: 3, title: 'Март'},
+      {value: 4, title: 'Апрель'},
+      {value: 5, title: 'Май'},
+      {value: 6, title: 'Июнь'},
+      {value: 7, title: 'Июль'},
+      {value: 8, title: 'Август'},
+      {value: 9, title: 'Сентябрь'},
+      {value: 10, title: 'Октябрь'},
+      {value: 11, title: 'Ноябрь'},
+      {value: 12, title: 'Декабрь'}
     ];
     monthArray.map((m) => {
       if (m.value === month + 1) {
-        this.selectedMonthName = m.name;
+        this.selectedMonthTitle = m.title;
       }
     });
   }

@@ -10,8 +10,9 @@ import {CalendarService} from '@app/core/calendar.service';
 export class OneDayComponent implements OnInit {
 
   @Input() firstWeekFlag: boolean;
-  @Input() thisDay: Date;
+  @Input() thisDay: number;
   @Input() weekNumber: number;
+  @Input() events: FireBaseEvent[];
 
   calendarEvent: FireBaseEvent;
 
@@ -35,10 +36,11 @@ export class OneDayComponent implements OnInit {
     }
     this.userClickedOnThisDay = true;
     this.calendarService.selectedDayForEditEvent.next(thisDay);
-    this.calendarEvent = {date: undefined, eventName: '', members: []};
+    this.calendarEvent = this.events.find((event: FireBaseEvent) => thisDay === event.date);
   }
 
   closeFunc() {
     this.userClickedOnThisDay = false;
   }
+
 }

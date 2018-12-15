@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {EventsService} from '@app/core/events.service';
 import * as moment from 'moment';
 import 'moment/locale/ru';
-import {CalendarEvent} from '@app/core/interfaces';
+import {FireBaseEvent} from '@app/core/interfaces';
+import {FirebaseService} from '@app/core/firebase.service';
 
 @Component({
   selector: 'app-add-event-quick',
@@ -16,32 +16,26 @@ export class AddEventQuickComponent implements OnInit {
   parseErrors: string;
   label: string;
   quickAddEventDialogOpen: boolean;
-  newEvent = new CalendarEvent();
+  newEvent: FireBaseEvent;
 
-  constructor(private eventsService: EventsService) {
+  constructor(private afs: FirebaseService) {
   }
 
   ngOnInit() {
   }
 
   validateInputMask() {
-    const inputData = this.stringValuesNewCalendarEvent;
-    const dateNow = new Date();
-    let dayAndMonthFromString;
-    let hoursAndMinutesFromString;
-    let dateFromInputData: Date;
-    const inputSplitArray = inputData.split(',');
+    this.newEvent = {date: undefined, title: '', members: [], description: ''};
+
+    const inputSplitArray = this.stringValuesNewCalendarEvent.split(',');
     this.parseErrors = '';
 
-    if (inputSplitArray.length !== 3) {
-      this.label = '* 5 Марта, 14:00, День Рождения';
+    if (inputSplitArray.length < 1) {
+      this.label = '* 5 Марта, ';
       return;
     }
-    if (inputSplitArray[2].length < 2) {
-      this.label = 'событие не менее 2-х символов';
-      return;
-    }
-    dayAndMonthFromString = inputSplitArray[0].split(' ');
+    const dayAndMonthFromString = inputSplitArray[0].split(' ');
+
     if (!moment(dayAndMonthFromString[1], 'MMMM').isValid()) {
       this.parseErrors = 'Ошибка в месяце';
       return;
@@ -50,29 +44,43 @@ export class AddEventQuickComponent implements OnInit {
       this.parseErrors = 'Ошибка в дате';
       return;
     }
-    if (inputSplitArray[1].split(':').length < 2 || !moment(inputSplitArray[1], 'hh:mm').isValid()) {
-      this.parseErrors = 'Ошибка времени';
+    if (inputSplitArray.length < 2) {
+      this.label = '* 5 Марта, Событие, ';
       return;
     }
-
-    hoursAndMinutesFromString = inputSplitArray[1].split(':');
-
-    dateFromInputData = moment()
+    if (inputSplitArray[1].length < 2) {
+      this.label = 'событие не менее 2-х символов';
+      return;
+    }
+    if (inputSplitArray.length < 3) {
+      this.label = '* 5 Марта, Событие, Описание';
+      return;
+    }
+    if (inputSplitArray[2].length < 2) {
+      this.parseErrors = 'Описание события не менее 2х символов';
+      return;
+    }
+    const dateFromInputData = moment()
       .month(dayAndMonthFromString[1])
-      .date(dayAndMonthFromString[0])
-      .hours(hoursAndMinutesFromString[0])
-      .minutes(hoursAndMinutesFromString[1])
+      .date(parseFloat(dayAndMonthFromString[0]))
+      .startOf('day')
       .toDate();
+    const titleFromString = inputSplitArray[1];
+    const descriptionFromString = inputSplitArray[2];
+    const dateNow = new Date();
+
     if (dateNow > dateFromInputData) {
       dateFromInputData.setFullYear(dateNow.getFullYear() + 1);
     }
-    this.newEvent.date = dateFromInputData;
-    this.newEvent.description = inputSplitArray[2];
+
+    this.newEvent.date = dateFromInputData.getTime();
+    this.newEvent.title = titleFromString;
+    this.newEvent.description = descriptionFromString;
   }
 
   createNewCalendarEvent() {
-    this.eventsService.createNewCalendarEvent(this.newEvent).subscribe(
-      (res) => console.log(res)
-    );
+    console.log(this.newEvent);
+    this.afs.addEvent(this.newEvent);
+    this.quickAddEventDialogOpen = false;
   }
 }

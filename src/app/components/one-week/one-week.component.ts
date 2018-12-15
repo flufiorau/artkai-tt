@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Week} from '@app/core/interfaces';
+import {FireBaseEvent, Week} from '@app/core/interfaces';
 
 @Component({
   selector: 'app-one-week',
@@ -9,6 +9,7 @@ import {Week} from '@app/core/interfaces';
 export class OneWeekComponent implements OnInit {
 
   @Input() oneWeekData: Week;
+  @Input() events: FireBaseEvent[];
   @Input() columns: string[];
   @Input() firstRow: boolean;
   @Input() weekNumber: number;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FireBaseEvent} from '@app/core/interfaces';
+import {CalendarEventFromForm, FireBaseEvent} from '@app/core/interfaces';
 import {FirebaseService} from '@app/core/firebase.service';
-import * as moment from 'moment';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-event-editor',
@@ -10,27 +10,36 @@ import * as moment from 'moment';
 })
 export class EventEditorComponent implements OnInit {
 
-  @Input() dateFromCell: Date;
+  @Input() dateFromCell: number;
   @Input() calendarEvent: FireBaseEvent;
   @Output() closeEventEditor = new EventEmitter<boolean>();
   @Input() weekNumber: number;
   revertCSSPosition: boolean;
   upperCSSPosition: boolean;
   public error: string;
+  eventEditorFormControl;
 
   constructor(private afs: FirebaseService) {
+    this.eventEditorFormControl = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      eventDate: new FormControl(''),
+      eventMembers: new FormControl(''),
+      eventDescription: new FormControl('')
+    });
   }
 
   ngOnInit() {
+    this.eventEditorFormControl.controls['eventDate'].setValue(this.dateFromCell);
     this.editXYPositionBlock();
   }
 
   addNewEventToBase() {
-    this.afs.addEvent(this.calendarEvent);
+    this.afs.addEvent(this.validateFormInput(this.eventEditorFormControl.value));
+    this.closeEventEditor.emit();
   }
 
   deleteCurrentEvent() {
-
+    this.afs.deleteEvent(this.calendarEvent);
   }
 
   closeEventEditorForm() {
@@ -38,7 +47,8 @@ export class EventEditorComponent implements OnInit {
   }
 
   private editXYPositionBlock() {
-    if (this.dateFromCell.getDay() > 4 || this.dateFromCell.getDay() === 0) {
+    const dayOfWeek = new Date(this.dateFromCell).getDay();
+    if (dayOfWeek > 4 || dayOfWeek === 0) {
       this.revertCSSPosition = true;
     }
     if (this.weekNumber > 3) {
@@ -46,29 +56,22 @@ export class EventEditorComponent implements OnInit {
     }
   }
 
-  validateInputDate(inputData: string) {
-    if (inputData.indexOf(',') === -1) {
-      return;
+  getErrorMessage(whatInput) {
+    switch (whatInput) {
+      case 'title':
+        return this.eventEditorFormControl.controls['title'].hasError('required') ? 'Необходимо ввести название события' :
+          this.eventEditorFormControl.controls['title'].hasError('minlength') ? 'Длина на менее 2х символов' : '';
     }
-    const inputSplitArray = inputData.split(',');
+  }
 
-    if (inputSplitArray.length !== 3) {
-      this.error = 'Ошибка формата даты: День, месяц, год';
-      return;
-    }
-    console.warn(this.error);
-    if (!moment(inputSplitArray[0], 'DD').isValid()) {
-      this.error = 'День не корректен';
-      return;
-    }
-    if (!moment(inputSplitArray[1], 'MM').isValid()) {
-      this.error = 'Месяц не корректен';
-      return;
-    }
-    if (!moment(inputSplitArray[2], 'YYYY').isValid()) {
-      this.error = 'Год не корректен';
-      return;
-    }
-    console.warn('not error');
+
+  validateFormInput(eventEditorForm: CalendarEventFromForm): FireBaseEvent {
+    this.calendarEvent = {
+      date: this.dateFromCell,
+      title: eventEditorForm.title,
+      description: eventEditorForm.eventDescription,
+      members: eventEditorForm.eventMembers.split(',')
+    };
+    return this.calendarEvent;
   }
 }

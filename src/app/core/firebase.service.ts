@@ -14,25 +14,25 @@ export class FirebaseService {
   eventDoc: AngularFirestoreDocument<FireBaseEvent>;
 
   constructor(public afs: AngularFirestore) {
-    this.eventsCollection = this.afs.collection('events', ref => ref.orderBy('date', 'asc'));
+  }
 
-    this.events = this.eventsCollection.snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as FireBaseEvent;
-          data.id = a.payload.doc.id;
+  getEventsByMonth(dateBegin: number, dateEnd: number) {
+    // this.eventsCollection = this.afs.collection('events', ref => ref.orderBy('date', 'asc'));
+    this.eventsCollection = this.afs.collection('events', ref => ref.where('date', '>=', dateBegin).where('date', '<=', dateEnd));
+    return this.events = this.eventsCollection.snapshotChanges().pipe(
+      map(eventsArray => {
+        return eventsArray.map(eventItem => {
+          const data = eventItem.payload.doc.data() as FireBaseEvent;
+          data.id = eventItem.payload.doc.id;
           return data;
         });
       })
     );
   }
 
-  getEvents() {
-    return this.events;
-  }
-
   addEvent(event: FireBaseEvent) {
     this.eventsCollection.add(event);
+    // this.getEventsByMonth();
   }
 
   deleteEvent(event: FireBaseEvent) {

@@ -14,7 +14,6 @@
     </ng-template>
     <input type="text" class="add-event-quick__input"
            placeholder="5 Марта, 14:00, День Рождение"
-           (blur)="quickAddEventDialogOpen = false"
            (input)="validateInputMask()"
            [(ngModel)]="stringValuesNewCalendarEvent">
   </label>

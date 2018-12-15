@@ -5,6 +5,12 @@
   <ng-container *ngIf="!firstWeekFlag">
     {{thisDay | date: 'd'}}
   </ng-container>
+  <ng-container *ngFor="let event of events">
+    <ng-container *ngIf="event.date === thisDay">
+      <p>{{event.title}}</p>
+      <p>{{event.description}}</p>
+    </ng-container>
+  </ng-container>
 </div>
 <div class="event-editor" *ngIf="userClickedOnThisDay && selectedDayForEditEvent === thisDay">
   <app-event-editor

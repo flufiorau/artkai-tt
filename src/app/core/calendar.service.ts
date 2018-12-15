@@ -8,23 +8,23 @@ import {BehaviorSubject} from 'rxjs';
 
 export class CalendarService {
 
-  calendarStartDate: Date;
-  calendarEndDate: Date;
+    calendarStartDate: number;
+  calendarEndDate: number;
   calendarForView = new BehaviorSubject<Week[]>([]);
-  selectedDayForEditEvent = new BehaviorSubject<Date>(new Date);
+  selectedDayForEditEvent = new BehaviorSubject<Date>(new Date());
 
   constructor() {
   }
 
   setCalendarStartDate(date) {
     const countDaysFromMonday = (date.getDay() - 1);
-    this.calendarStartDate = new Date(date.setDate(date.getDate() - countDaysFromMonday));
+    this.calendarStartDate = new Date(date.setDate(date.getDate() - countDaysFromMonday)).getTime();
   }
 
   setCalendarEndDate(date) {
     if (date.getDay() !== 0) {
       const countDaysFromSunday = (7 - date.getDay());
-      this.calendarEndDate = new Date(date.setDate(date.getDate() + countDaysFromSunday));
+      this.calendarEndDate = new Date(date.setDate(date.getDate() + countDaysFromSunday)).getTime();
     } else {
       this.calendarEndDate = date;
     }
@@ -33,35 +33,35 @@ export class CalendarService {
   createCalendarTableDataSource() {
     this.calendarForView.next([]);
     const calendar = [];
-    let anyDate = new Date(this.calendarStartDate.getTime());
+    let anyDate = new Date(this.calendarStartDate).getTime();
 
     do {
       let oneWeek = new Week();
       for (let j = 0; j < 7; j++) {
-        switch (anyDate.getDay()) {
+        switch (new Date(anyDate).getDay()) {
           case 1:
-            oneWeek.monday = anyDate;
+            oneWeek.monday = new Date(anyDate).getTime();
             break;
           case 2:
-            oneWeek.tuesday = anyDate;
+            oneWeek.tuesday = new Date(anyDate).getTime();
             break;
           case 3:
-            oneWeek.wednesday = anyDate;
+            oneWeek.wednesday = new Date(anyDate).getTime();
             break;
           case 4:
-            oneWeek.thursday = anyDate;
+            oneWeek.thursday = new Date(anyDate).getTime();
             break;
           case 5:
-            oneWeek.friday = anyDate;
+            oneWeek.friday = new Date(anyDate).getTime();
             break;
           case 6:
-            oneWeek.saturday = anyDate;
+            oneWeek.saturday = new Date(anyDate).getTime();
             break;
           case 0:
-            oneWeek.sunday = anyDate;
+            oneWeek.sunday = new Date(anyDate).getTime();
             break;
         }
-        anyDate = new Date(this.calendarStartDate.setDate(this.calendarStartDate.getDate() + 1));
+        anyDate = new Date(new Date(anyDate).setDate(new Date(anyDate).getDate() + 1)).getTime();
       }
       calendar.push(oneWeek);
       oneWeek = new Week();
