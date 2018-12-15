@@ -8,10 +8,10 @@ import {BehaviorSubject} from 'rxjs';
 
 export class CalendarService {
 
-    calendarStartDate: number;
+  calendarStartDate: number;
   calendarEndDate: number;
   calendarForView = new BehaviorSubject<Week[]>([]);
-  selectedDayForEditEvent = new BehaviorSubject<Date>(new Date());
+  selectedDayForEditEvent = new BehaviorSubject<number>(new Date().getTime());
 
   constructor() {
   }

@@ -16,7 +16,7 @@ export class OneDayComponent implements OnInit {
 
   calendarEvent: FireBaseEvent;
 
-  selectedDayForEditEvent: Date;
+  selectedDayForEditEvent: number;
   userClickedOnThisDay: boolean;
 
   constructor(public calendarService: CalendarService) {
@@ -24,7 +24,7 @@ export class OneDayComponent implements OnInit {
 
 
   ngOnInit() {
-    this.calendarService.selectedDayForEditEvent.subscribe((selectedDay: Date) => {
+    this.calendarService.selectedDayForEditEvent.subscribe((selectedDay: number) => {
       this.selectedDayForEditEvent = selectedDay;
     });
   }

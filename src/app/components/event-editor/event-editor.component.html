@@ -7,15 +7,15 @@
         [class.triangle]="!revertCSSPosition && !revertCSSPosition">▶</span>
   <span class="event-editor__closer"
         (click)="closeEventEditorForm()">+</span>
-  <ng-container *ngIf="calendarEvent; else createEvent">
-    <p>{{calendarEvent.title}}</p>
-    <p>{{calendarEvent.date| date: 'dd,MM,yyyy'}}</p>
-    <p>{{calendarEvent.members}}</p>
-    <textarea class="event-editor__textarea textarea" name="eventDescription"
-              placeholder="Описание" [disabled]="true">{{calendarEvent.description}}</textarea>
-  </ng-container>
-  <ng-template #createEvent>
-    <form [formGroup]="eventEditorFormControl">
+  <form [formGroup]="eventEditorFormControl">
+    <ng-container *ngIf="calendarEvent; else createEvent">
+      <p>{{calendarEvent.title}}</p>
+      <p>{{calendarEvent.date| date: 'dd,MM,yyyy'}}</p>
+      <p>{{calendarEvent.members}}</p>
+      <textarea class="event-editor__textarea textarea" name="eventDescription"
+                placeholder="Описание" [disabled]="true">{{calendarEvent.description}}</textarea>
+    </ng-container>
+    <ng-template #createEvent>
       <label>
         <input type="text" class="event-editor__input input" name="title"
                placeholder="Событие"
@@ -43,15 +43,16 @@
                 placeholder="Описание"
                 formControlName="eventDescription"></textarea>
       </label>
-      <button type="submit" class="event-editor__button button"
-              [disabled]="eventEditorFormControl.invalid"
-              (click)="addNewEventToBase()">Готово
-      </button>
-      <button type="button" class="event-editor__button button"
-              [disabled]="!calendarEvent"
-              (click)="deleteCurrentEvent()">Удалить
-      </button>
-    </form>
-  </ng-template>
+    </ng-template>
+    <button type="submit" class="event-editor__button button"
+            [disabled]="eventEditorFormControl.invalid"
+            (click)="addNewEventToBase()">Готово
+    </button>
+    <button type="button" class="event-editor__button button"
+            [disabled]="!calendarEvent"
+            (click)="deleteCurrentEvent()">Удалить
+    </button>
+
+  </form>
 </div>
 

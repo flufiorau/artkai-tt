@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '@app/core/search.service';
-import {CalendarEvent} from '@app/core/interfaces';
+import {FireBaseEvent} from '@app/core/interfaces';
+import {FirebaseService} from '@app/core/firebase.service';
 
 
 @Component({
@@ -10,24 +11,30 @@ import {CalendarEvent} from '@app/core/interfaces';
 })
 export class SearcherComponent implements OnInit {
 
-  searchResults: CalendarEvent[];
+  searchResults: FireBaseEvent[];
   searcher_input = '';
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService,
+              private afs: FirebaseService) {
   }
 
   ngOnInit() {
-    this.searchService.searchDataSource.subscribe(
-      (searchDataSource: CalendarEvent[]) => this.searchResults = searchDataSource
+    this.afs.searchDataSource.subscribe(
+      (searchDataSource: FireBaseEvent[]) => this.searchResults = searchDataSource
     );
   }
 
   searchEvents() {
-    this.searchService.getEventsFromBase(this.searcher_input.toLowerCase());
+    this.afs.getEventsBySearch(this.searcher_input).subscribe(
+      (res: FireBaseEvent[]) => {
+        this.searchResults = res;
+      }
+    );
+    // this.searchService.getEventsFromBase(this.searcher_input.toLowerCase());
   }
 
   clearThis() {
     this.searcher_input = '';
-    this.searchService.searchDataSource.next([]);
+    this.afs.searchDataSource.next([]);
   }
 }

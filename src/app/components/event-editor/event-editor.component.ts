@@ -40,6 +40,7 @@ export class EventEditorComponent implements OnInit {
 
   deleteCurrentEvent() {
     this.afs.deleteEvent(this.calendarEvent);
+    this.closeEventEditor.emit();
   }
 
   closeEventEditorForm() {
