@@ -1,9 +1,23 @@
+.thisDay__event {
+  background-color: #c1e5ff;
+  border: 1px solid rgba(162, 216, 254, 1);
+}
+
+.event-info__title {
+  font-weight: bold;
+  font-size: 10px;
+  margin: 3px 0;
+}
+
+.event-info {
+  font-size: 9px;
+}
+
 .one-day {
   font-size: 10px;
   height: 85px;
   padding: 4px;
   width: 93px;
-  display: table-cell;
 }
 
 p::first-letter {

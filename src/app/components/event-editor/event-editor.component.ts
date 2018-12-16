@@ -71,7 +71,7 @@ export class EventEditorComponent implements OnInit {
       date: this.dateFromCell,
       title: eventEditorForm.title,
       description: eventEditorForm.eventDescription,
-      members: eventEditorForm.eventMembers.split(',')
+      members: eventEditorForm.eventMembers
     };
     return this.calendarEvent;
   }

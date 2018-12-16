@@ -1,21 +1,22 @@
-export class CalendarEvent {
-  date: number;
-  description: string;
-  members: string[];
-  editFlag?: boolean;
-  constructor() {
-  this.date = 0;
-  this.description = '';
-  this.members = [];
-}
-}
+// export class CalendarEvent {
+//   title: string
+//   date: number;
+//   description: string;
+//   members: string;
+//   editFlag?: boolean;
+//   constructor() {
+//   this.date = 0;
+//   this.description = '';
+//   this.members = '';
+// }
+// }
 
 export interface FireBaseEvent {
   title: string;
   id?: string;
   date: number;
-  description?: string;
-  members: string[];
+  description: string;
+  members: string;
 }
 
 export interface CalendarEventFromForm {
@@ -25,10 +26,10 @@ export interface CalendarEventFromForm {
   eventMembers?: string;
 }
 
-export interface Day {
-  unixDate: number;
-  event: CalendarEvent;
-}
+// export interface Day {
+//   unixDate: number;
+//   event: FireBaseEvent;
+// }
 
 export class Week {
   monday: number;

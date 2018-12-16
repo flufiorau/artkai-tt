@@ -2,11 +2,11 @@
   <div class="header">
     <div class="actions-bar">
       <app-add-event-quick></app-add-event-quick>
-      <app-searcher></app-searcher>
+      <app-searcher [dateSelectorComponent]="DateSelectorComponent"></app-searcher>
     </div>
   </div>
   <div class="content">
-    <app-date-selector></app-date-selector>
+    <app-date-selector #DateSelectorComponent></app-date-selector>
     <div class="content__full-month">
       <app-full-month></app-full-month>
     </div>

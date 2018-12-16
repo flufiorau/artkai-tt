@@ -2,7 +2,8 @@
   font-family: Verdana, sans-serif;
   padding: 0 5px;
   height: 36px;
-  border-bottom: 2px solid rgba(211,211,211,.7);;
+  border-bottom: 2px solid rgba(211,211,211,.7);
+  cursor: pointer;
 }
 
 .calendar-event__description {

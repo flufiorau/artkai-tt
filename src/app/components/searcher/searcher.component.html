@@ -2,16 +2,18 @@
   <label class="actions-bar__search-icon">🔍
     <input type="text" class="actions-bar__search-input input"
            placeholder="Событие, дата или участник"
-           (input)="searchEvents()" [(ngModel)]="searcher_input" />
+           (input)="searchEvents()" [(ngModel)]="searcher_input"/>
     <span class="input__clear" (click)="clearThis()">❌</span>
   </label>
   <div class="searcher__autocomplete"
-       *ngIf="searchResults.length">
+       *ngIf="searchResults && searchResults.length">
     <span class="searcher__triangle">▲</span>
     <div class="searcher__results">
       <app-search-autocomplete-item
         *ngFor="let calendarEvent of searchResults"
-        [calendarEvent]="calendarEvent">
+        [calendarEvent]="calendarEvent"
+        [dateSelectorComponent]="dateSelectorComponent"
+        (clearResults)="clearThis()">
       </app-search-autocomplete-item>
     </div>
   </div>

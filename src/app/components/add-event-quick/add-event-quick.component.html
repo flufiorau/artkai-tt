@@ -1,11 +1,12 @@
 <div class="actions-bar__quick-task-buttons">
   <button class="button actions-bar__create-task"
           [class.button_active]="quickAddEventDialogOpen"
-  (click)="quickAddEventDialogOpen = !quickAddEventDialogOpen">Добавить</button>
+          (click)="quickAddEventDialogOpen = !quickAddEventDialogOpen">Добавить
+  </button>
   <button class="button actions-bar__update-calendar">Обновить</button>
 </div>
 <div class="add-event-quick"
-  *ngIf="quickAddEventDialogOpen">
+     *ngIf="quickAddEventDialogOpen">
   <span class="add-event-quick__triangle">🔺</span>
   <label class="add-event-quick__label">
     <sup class="label__errors" *ngIf="parseErrors; else labelPlaceholder">{{parseErrors}}</sup>

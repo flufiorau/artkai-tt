@@ -1,4 +1,5 @@
-<div class="one-day" (click)="onClicked(thisDay)">
+<div class="one-day" (click)="onClicked(thisDay)"
+     [class.thisDay__event]="backgroundColor">
   <ng-container *ngIf="firstWeekFlag">
     <p>{{thisDay | date: 'EEEE, d'}}</p>
   </ng-container>
@@ -6,10 +7,12 @@
     {{thisDay | date: 'd'}}
   </ng-container>
   <ng-container *ngFor="let event of events">
+    {{event.date === thisDay ? setBackgroundColor() : null}}
     <ng-container *ngIf="event.date === thisDay">
-      <p>{{event.title}}</p>
-      <p>{{event.description}}</p>
-      <p>members: {{event.members}}</p>
+      <div class="event-info">
+        <p class="event-info__title">{{event.title}}</p>
+        <p class="event-info__members">{{event.members || event.description}}</p>
+      </div>
     </ng-container>
   </ng-container>
 </div>

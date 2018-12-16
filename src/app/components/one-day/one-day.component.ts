@@ -18,6 +18,7 @@ export class OneDayComponent implements OnInit {
 
   selectedDayForEditEvent: number;
   userClickedOnThisDay: boolean;
+  backgroundColor: boolean;
 
   constructor(public calendarService: CalendarService) {
   }
@@ -41,6 +42,10 @@ export class OneDayComponent implements OnInit {
 
   closeFunc() {
     this.userClickedOnThisDay = false;
+  }
+
+  setBackgroundColor(): void {
+    this.backgroundColor = true;
   }
 
 }

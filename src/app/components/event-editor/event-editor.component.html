@@ -9,10 +9,10 @@
         (click)="closeEventEditorForm()">+</span>
   <form [formGroup]="eventEditorFormControl">
     <ng-container *ngIf="calendarEvent; else createEvent">
-      <p>{{calendarEvent.title}}</p>
-      <p>{{calendarEvent.date| date: 'dd,MM,yyyy'}}</p>
-      <p>{{calendarEvent.members}}</p>
-      <textarea class="event-editor__textarea textarea" name="eventDescription"
+      <p class="event-editor__title"><b>{{calendarEvent.title}}</b></p>
+      <p class="event-editor__date">{{calendarEvent.date| date: 'd, MMMM'}}</p>
+      <p class="event-editor__members">Участники: <br>{{calendarEvent.members}}</p>
+      <textarea class="event-editor__textarea textarea event-editor__description" name="eventDescription"
                 placeholder="Описание" [disabled]="true">{{calendarEvent.description}}</textarea>
     </ng-container>
     <ng-template #createEvent>
@@ -39,7 +39,7 @@
         </p>
       </ng-container>
       <label>
-      <textarea class="event-editor__textarea textarea" name="eventDescription"
+      <textarea class="event-editor__textarea textarea textarea-input" name="eventDescription"
                 placeholder="Описание"
                 formControlName="eventDescription"></textarea>
       </label>

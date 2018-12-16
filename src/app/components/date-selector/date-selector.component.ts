@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CalendarService} from '@app/core/calendar.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-date-selector',
@@ -8,15 +9,25 @@ import {CalendarService} from '@app/core/calendar.service';
 })
 export class DateSelectorComponent implements OnInit {
 
-  selectedYear: number;
-  selectedMonth: number;
-  selectedMonthTitle: string;
+  selectedYear = new BehaviorSubject<number>(0);
+  selectedMonth = new BehaviorSubject<number>(0);
+  selectedMonthTitle  = new BehaviorSubject<string>('');
+  yearForView;
+  monthForView;
+
+
 
   constructor(private calendarService: CalendarService) {
   }
 
   ngOnInit() {
     this.loadMonthWithCurrentDay();
+    this.selectedMonthTitle.subscribe(
+      res => this.monthForView = res
+    );
+    this.selectedYear.subscribe(
+      res => this.yearForView = res
+    );
   }
 
   getMonthAndYear(year, month) {
@@ -27,30 +38,39 @@ export class DateSelectorComponent implements OnInit {
   }
 
   loadPreviousMonth() {
-    if (this.selectedMonth > 0) {
-      --this.selectedMonth;
+    if (this.selectedMonth.value > 0) {
+      this.selectedMonth.next(this.selectedMonth.value - 1);
     } else {
-      this.selectedMonth = 11;
-      --this.selectedYear;
+      this.selectedMonth.next(11);
+      this.selectedYear.next(this.selectedYear.value - 1);
     }
-    this.getMonthAndYear(this.selectedYear, this.selectedMonth);
+    this.getMonthAndYear(this.selectedYear.value, this.selectedMonth.value);
   }
 
   loadNextMonth() {
-    if (this.selectedMonth < 11) {
-      ++this.selectedMonth;
+    if (this.selectedMonth.value < 11) {
+      this.selectedMonth.next(this.selectedMonth.value + 1);
     } else {
-      this.selectedMonth = 0;
-      ++this.selectedYear;
+      this.selectedMonth.next(0);
+      this.selectedYear.next(this.selectedYear.value + 1);
     }
-    this.getMonthAndYear(this.selectedYear, this.selectedMonth);
+    this.getMonthAndYear(this.selectedYear.value, this.selectedMonth.value);
   }
 
-  loadMonthWithCurrentDay() {
-    const date = new Date();
-    this.selectedYear = date.getFullYear();
-    this.selectedMonth = date.getMonth();
-    this.getMonthAndYear(this.selectedYear, this.selectedMonth);
+  loadMonthWithEventDate(value) {
+    this.loadMonthWithCurrentDay(value);
+  }
+
+  loadMonthWithCurrentDay(selectedDateFromEvent?: number) {
+    let date;
+    if (selectedDateFromEvent) {
+      date = new Date(selectedDateFromEvent);
+    } else {
+      date = new Date();
+    }
+    this.selectedYear.next(date.getFullYear());
+    this.selectedMonth.next(date.getMonth());
+    this.getMonthAndYear(this.selectedYear.value, this.selectedMonth.value);
   }
 
   private getMonthTitle(month: number) {
@@ -70,7 +90,7 @@ export class DateSelectorComponent implements OnInit {
     ];
     monthArray.map((m) => {
       if (m.value === month + 1) {
-        this.selectedMonthTitle = m.title;
+        this.selectedMonthTitle.next(m.title);
       }
     });
   }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import 'moment/locale/ru';
 import {FireBaseEvent} from '@app/core/interfaces';
@@ -12,20 +12,33 @@ import {FirebaseService} from '@app/core/firebase.service';
 export class AddEventQuickComponent implements OnInit {
 
   stringValuesNewCalendarEvent: string;
-  inputTextIsNotValid = false;
+  inputTextIsNotValid = true;
   parseErrors: string;
   label: string;
   quickAddEventDialogOpen: boolean;
   newEvent: FireBaseEvent;
 
-  constructor(private afs: FirebaseService) {
+  constructor(public elementRef: ElementRef,
+              private afs: FirebaseService) {
+  }
+
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement) {
+    if (!targetElement) {
+      return;
+    }
+    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+
+    if (!clickedInside) {
+      this.quickAddEventDialogOpen = false;
+    }
   }
 
   ngOnInit() {
   }
 
   validateInputMask() {
-    this.newEvent = {date: undefined, title: '', members: [], description: ''};
+    this.newEvent = {date: undefined, title: '', members: '', description: ''};
 
     const inputSplitArray = this.stringValuesNewCalendarEvent.split(',');
     this.parseErrors = '';
@@ -60,6 +73,7 @@ export class AddEventQuickComponent implements OnInit {
       this.parseErrors = 'Описание события не менее 2х символов';
       return;
     }
+    this.inputTextIsNotValid = false;
     const dateFromInputData = moment()
       .month(dayAndMonthFromString[1])
       .date(parseFloat(dayAndMonthFromString[0]))
@@ -74,12 +88,11 @@ export class AddEventQuickComponent implements OnInit {
     }
 
     this.newEvent.date = dateFromInputData.getTime();
-    this.newEvent.title = titleFromString;
-    this.newEvent.description = descriptionFromString;
+    this.newEvent.title = titleFromString.charAt(0).toUpperCase() + titleFromString.substr(1);
+    this.newEvent.description = descriptionFromString.charAt(0).toUpperCase() + descriptionFromString.substr(1);
   }
 
   createNewCalendarEvent() {
-    console.log(this.newEvent);
     this.afs.addEvent(this.newEvent);
     this.quickAddEventDialogOpen = false;
   }
