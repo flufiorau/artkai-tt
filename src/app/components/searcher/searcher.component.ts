@@ -1,8 +1,7 @@
 import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {SearchService} from '@app/core/search.service';
-import {FireBaseEvent} from '@app/core/interfaces';
-import {FirebaseService} from '@app/core/firebase.service';
+import {CalendarEvent} from '@app/core/interfaces';
 import {DateSelectorComponent} from '@app/components/date-selector/date-selector.component';
+import {CalendarService} from '@app/core/calendar.service';
 
 
 @Component({
@@ -12,13 +11,12 @@ import {DateSelectorComponent} from '@app/components/date-selector/date-selector
 })
 export class SearcherComponent implements OnInit {
 
-  searchResults: FireBaseEvent[];
+  searchResults: CalendarEvent[];
   searcher_input = '';
   @Input() dateSelectorComponent: DateSelectorComponent;
 
-  constructor(private searchService: SearchService,
-              public elementRef: ElementRef,
-              private afs: FirebaseService) {
+  constructor(private calendarService: CalendarService,
+              public elementRef: ElementRef) {
   }
 
   @HostListener('document:click', ['$event', '$event.target'])
@@ -41,18 +39,14 @@ export class SearcherComponent implements OnInit {
       this.searchResults = undefined;
       return;
     }
-    this.afs.getAllEventsBySearch()
-      .subscribe(
-        (res: FireBaseEvent[]) => {
-          if (this.searcher_input) {
-            this.searchResults = res.filter(
-              data =>
-                (data.title.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1) ||
-                (data.members.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1) ||
-                (data.description.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1)
-            );
-          }
-        });
+    if (this.searcher_input) {
+      this.searchResults = this.calendarService.eventsCalendarDataSource.filter(
+        data =>
+          (data.title && data.title.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1) ||
+          (data.members && data.members.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1) ||
+          (data.description && data.description.toLowerCase().indexOf(this.searcher_input.toLowerCase()) !== -1)
+      );
+    }
   }
 
   clearThis() {

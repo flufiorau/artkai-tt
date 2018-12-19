@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {FireBaseEvent} from '@app/core/interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -9,20 +9,18 @@ import {map} from 'rxjs/operators';
 })
 export class FirebaseService {
 
-  eventsCollection: AngularFirestoreCollection<FireBaseEvent>;
-  searchEventsCollection: AngularFirestoreCollection<FireBaseEvent>;
-  events: Observable<FireBaseEvent[]>;
-  searchDataSource: Observable<FireBaseEvent[]>;
+  eventsCollection: AngularFirestoreCollection<CalendarEvent>;
+  events: Observable<CalendarEvent[]>;
 
   constructor(public afs: AngularFirestore) {
   }
 
-  getEventsByMonth(dateBegin: number, dateEnd: number) {
-    this.eventsCollection = this.afs.collection('events', ref => ref.where('date', '>=', dateBegin).where('date', '<=', dateEnd));
+  getEventList() {
+    this.eventsCollection = this.afs.collection('events', ref => ref);
     return this.events = this.eventsCollection.snapshotChanges().pipe(
       map(eventsArray => {
         return eventsArray.map(eventItem => {
-          const data = eventItem.payload.doc.data() as FireBaseEvent;
+          const data = eventItem.payload.doc.data() as CalendarEvent;
           data.id = eventItem.payload.doc.id;
           return data;
         });
@@ -30,25 +28,12 @@ export class FirebaseService {
     );
   }
 
-  getAllEventsBySearch() {
-    this.searchEventsCollection = this.afs.collection('events', ref =>
-      ref.orderBy('title').startAt(''));
-    return this.searchDataSource = this.searchEventsCollection.snapshotChanges().pipe(
-      map(eventsArray => {
-        return eventsArray.map(eventItem => {
-          const data = eventItem.payload.doc.data() as FireBaseEvent;
-          data.id = eventItem.payload.doc.id;
-          return data;
-        });
-      })
-    );
-  }
 
-  addEvent(event: FireBaseEvent) {
+  addEvent(event: CalendarEvent) {
     this.eventsCollection.add(event);
   }
 
-  deleteEvent(event: FireBaseEvent) {
+  deleteEvent(event: CalendarEvent) {
     this.afs.doc(`events/${event.id}`).delete();
   }
 

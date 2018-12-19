@@ -1,4 +1,4 @@
 <div class="calendar-event" (click)="goToThisEventDate()">
   <p class="calendar-event__description">{{calendarEvent.title || calendarEvent.description}}</p>
-  <p class="calendar-event__date">{{calendarEvent.date | date: 'd MMMM'}}</p>
+  <p class="calendar-event__date">{{calendarEvent.date | date: 'd MMMM, yyyy'}}</p>
 </div>

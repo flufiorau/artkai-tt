@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CalendarEventFromForm, FireBaseEvent} from '@app/core/interfaces';
+import {CalendarEventFromForm, CalendarEvent} from '@app/core/interfaces';
 import {FirebaseService} from '@app/core/firebase.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -11,7 +11,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class EventEditorComponent implements OnInit {
 
   @Input() dateFromCell: number;
-  @Input() calendarEvent: FireBaseEvent;
+  @Input() calendarEvent: CalendarEvent;
   @Output() closeEventEditor = new EventEmitter<boolean>();
   @Input() weekNumber: number;
   revertCSSPosition: boolean;
@@ -66,12 +66,13 @@ export class EventEditorComponent implements OnInit {
   }
 
 
-  validateFormInput(eventEditorForm: CalendarEventFromForm): FireBaseEvent {
+  validateFormInput(eventEditorForm: CalendarEventFromForm): CalendarEvent {
     this.calendarEvent = {
       date: this.dateFromCell,
       title: eventEditorForm.title,
       description: eventEditorForm.eventDescription,
-      members: eventEditorForm.eventMembers
+      members: eventEditorForm.eventMembers,
+      googleCalendarEvent: false
     };
     return this.calendarEvent;
   }

@@ -1,4 +1,6 @@
 .one-week__cell {
   border-top: 1px solid lightgray;
   border-right: 1px solid lightgray;
+  max-width: 104px;
+  max-height: 96px;
 }

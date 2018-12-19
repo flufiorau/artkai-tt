@@ -26,7 +26,7 @@
         <input type="text" class="event-editor__input input"
                placeholder="День, месяц, год"
                value="{{eventEditorFormControl.controls['eventDate'].value | date: 'dd,MM,yyyy'}}"
-               formControlName="eventDate" name="eventDate" disabled>
+               name="eventDate" [attr.disabled]="true">
       </label>
       <label>
         <input type="text" class="event-editor__input input" name="eventMembers"

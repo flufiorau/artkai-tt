@@ -1,7 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import 'moment/locale/ru';
-import {FireBaseEvent} from '@app/core/interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 import {FirebaseService} from '@app/core/firebase.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AddEventQuickComponent implements OnInit {
   parseErrors: string;
   label: string;
   quickAddEventDialogOpen: boolean;
-  newEvent: FireBaseEvent;
+  newEvent: CalendarEvent;
 
   constructor(public elementRef: ElementRef,
               private afs: FirebaseService) {
@@ -38,7 +38,7 @@ export class AddEventQuickComponent implements OnInit {
   }
 
   validateInputMask() {
-    this.newEvent = {date: undefined, title: '', members: '', description: ''};
+    this.newEvent = {date: undefined, title: '', members: '', description: '', googleCalendarEvent: false};
 
     const inputSplitArray = this.stringValuesNewCalendarEvent.split(',');
     this.parseErrors = '';

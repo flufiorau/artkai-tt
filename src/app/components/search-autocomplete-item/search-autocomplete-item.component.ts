@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FireBaseEvent} from '@app/core/interfaces';
+import {CalendarEvent} from '@app/core/interfaces';
 import {DateSelectorComponent} from '@app/components/date-selector/date-selector.component';
 
 @Component({
@@ -10,7 +10,7 @@ import {DateSelectorComponent} from '@app/components/date-selector/date-selector
 })
 export class SearchAutocompleteItemComponent implements OnInit {
 
-  @Input() calendarEvent: FireBaseEvent;
+  @Input() calendarEvent: CalendarEvent;
   @Input() dateSelectorComponent: DateSelectorComponent;
   @Output() clearResults = new EventEmitter();
   constructor() { }

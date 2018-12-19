@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Week} from '@app/core/interfaces';
+import {CalendarEvent, Week} from '@app/core/interfaces';
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,9 @@ export class CalendarService {
 
   calendarStartDate: number;
   calendarEndDate: number;
-  calendarForView = new BehaviorSubject<Week[]>([]);
+  $calendarForView = new BehaviorSubject<Week[]>([]);
   selectedDayForEditEvent = new BehaviorSubject<number>(new Date().getTime());
+  eventsCalendarDataSource: CalendarEvent[] = [];
 
   constructor() {
   }
@@ -31,7 +32,7 @@ export class CalendarService {
   }
 
   createCalendarTableDataSource() {
-    this.calendarForView.next([]);
+    this.$calendarForView.next([]);
     const calendar = [];
     let anyDate = new Date(this.calendarStartDate).getTime();
 
@@ -66,6 +67,6 @@ export class CalendarService {
       calendar.push(oneWeek);
       oneWeek = new Week();
     } while (anyDate < this.calendarEndDate);
-    this.calendarForView.next(calendar);
+    this.$calendarForView.next(calendar);
   }
 }

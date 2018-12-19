@@ -7,14 +7,6 @@ export interface CalendarEvent {
   googleCalendarEvent: boolean;
 }
 
-export interface FireBaseEvent {
-  title: string;
-  id?: string;
-  date: number;
-  description: string;
-  members: string;
-}
-
 export interface CalendarEventFromForm {
   title: string;
   eventDate: number;

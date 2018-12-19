@@ -14,7 +14,6 @@ import {OneWeekComponent} from '@app/components/one-week/one-week.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '@env/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {SearchService} from '@app/core/search.service';
 import {FirebaseService} from '@app/core/firebase.service';
 
 registerLocaleData(localeUa, 'ru-UA');
@@ -39,7 +38,6 @@ registerLocaleData(localeUa, 'ru-UA');
   ],
   providers: [
     CalendarService,
-    SearchService,
     FirebaseService
   ],
   exports: [

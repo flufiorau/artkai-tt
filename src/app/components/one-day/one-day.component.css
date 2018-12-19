@@ -1,8 +1,3 @@
-.thisDay__event {
-  background-color: #c1e5ff;
-  border: 1px solid rgba(162, 216, 254, 1);
-}
-
 .event-info__title {
   font-weight: bold;
   font-size: 10px;
@@ -14,10 +9,12 @@
 }
 
 .one-day {
+  background-color: white;
   font-size: 10px;
   height: 85px;
   padding: 4px;
   width: 93px;
+  overflow: hidden;
 }
 
 p::first-letter {
@@ -26,4 +23,9 @@ p::first-letter {
 
 .event-editor {
   position: relative;
+}
+
+.thisDay__event {
+  background-color: #c1e5ff;
+  border: 1px solid rgba(162, 216, 254, 1);
 }
