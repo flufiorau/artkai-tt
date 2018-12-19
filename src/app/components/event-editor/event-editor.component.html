@@ -44,12 +44,19 @@
                 formControlName="eventDescription"></textarea>
       </label>
     </ng-template>
-    <button type="submit" class="event-editor__button button"
+    <button class="event-editor__button button"
+            *ngIf="calendarEvent && !calendarEvent.googleCalendarEvent && calendarEvent.title; else applyButton"
             [disabled]="eventEditorFormControl.invalid"
-            (click)="addNewEventToBase()">Готово
+            (click)="addNewEventToBase()">Изменить
     </button>
+    <ng-template #applyButton>
+      <button class="event-editor__button button"
+              [disabled]="eventEditorFormControl.invalid || calendarEvent.googleCalendarEvent"
+              (click)="addNewEventToBase()">Готово
+      </button>
+    </ng-template>
     <button type="button" class="event-editor__button button"
-            [disabled]="!calendarEvent"
+            [disabled]="!calendarEvent || calendarEvent.googleCalendarEvent"
             (click)="deleteCurrentEvent()">Удалить
     </button>
 

@@ -12,6 +12,7 @@ export interface CalendarEventFromForm {
   eventDate: number;
   eventDescription?: string;
   eventMembers?: string;
+  googleCalendarEvent?: boolean;
 }
 
 export interface CalendarList {
