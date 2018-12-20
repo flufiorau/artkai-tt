@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import 'moment/locale/ru';
 import {CalendarEvent} from '@app/core/interfaces';
 import {FirebaseService} from '@app/core/firebase.service';
+import {GoogleCalendarService} from "@app/core/google-calendar.service";
 
 @Component({
   selector: 'app-add-event-quick',
@@ -19,6 +20,7 @@ export class AddEventQuickComponent implements OnInit {
   newEvent: CalendarEvent;
 
   constructor(public elementRef: ElementRef,
+              private googleCalendarService: GoogleCalendarService,
               private afs: FirebaseService) {
   }
 
@@ -96,4 +98,5 @@ export class AddEventQuickComponent implements OnInit {
     this.afs.addEvent(this.newEvent);
     this.quickAddEventDialogOpen = false;
   }
+
 }

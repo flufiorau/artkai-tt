@@ -8,14 +8,16 @@
   <span class="event-editor__closer"
         (click)="closeEventEditorForm()">+</span>
   <form [formGroup]="eventEditorFormControl">
-    <ng-container *ngIf="calendarEvent; else createEvent">
+
+    <ng-container *ngIf="calendarEvent && !editMode">
       <p class="event-editor__title"><b>{{calendarEvent.title}}</b></p>
       <p class="event-editor__date">{{calendarEvent.date| date: 'd, MMMM'}}</p>
       <p class="event-editor__members">Участники: <br>{{calendarEvent.members}}</p>
       <textarea class="event-editor__textarea textarea event-editor__description" name="eventDescription"
                 placeholder="Описание" [disabled]="true">{{calendarEvent.description}}</textarea>
     </ng-container>
-    <ng-template #createEvent>
+
+    <ng-container *ngIf="!calendarEvent">
       <label>
         <input type="text" class="event-editor__input input" name="title"
                placeholder="Событие"
@@ -43,19 +45,62 @@
                 placeholder="Описание"
                 formControlName="eventDescription"></textarea>
       </label>
-    </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="editMode">
+      <label>
+        <input type="text" class="event-editor__input input" name="title"
+               placeholder="Событие"
+               value="{{calendarEvent.title}}"
+               formControlName="title">
+      </label>
+
+      <label>
+        <input type="text" class="event-editor__input input"
+               placeholder="День, месяц, год"
+               value="{{calendarEvent.date | date: 'dd,MM,yyyy'}}"
+               name="eventDate" [attr.disabled]="true">
+      </label>
+      <label>
+        <input type="text" class="event-editor__input input" name="eventMembers"
+               placeholder="Участники"
+               value="{{calendarEvent.members}}"
+               formControlName="eventMembers">
+      </label>
+      <ng-container *ngIf="eventEditorFormControl.controls['title'].invalid">
+        <p class="form-error" *ngIf="eventEditorFormControl.controls['title'].dirty">
+          {{getErrorMessage('title')}}
+        </p>
+      </ng-container>
+      <label>
+      <textarea class="event-editor__textarea textarea textarea-input" name="eventDescription"
+                placeholder="Описание"
+                [value]="calendarEvent.description"
+                formControlName="eventDescription"></textarea>
+      </label>
+    </ng-container>
+
     <button class="event-editor__button button"
-            *ngIf="calendarEvent && !calendarEvent.googleCalendarEvent && calendarEvent.title; else applyButton"
-            [disabled]="eventEditorFormControl.invalid"
-            (click)="addNewEventToBase()">Изменить
+            *ngIf="calendarEvent && !calendarEvent.googleCalendarEvent && calendarEvent.title && !editMode"
+            (click)="enterToEditMode(calendarEvent)">Изменить
     </button>
-    <ng-template #applyButton>
-      <button class="event-editor__button button"
-              [disabled]="eventEditorFormControl.invalid || calendarEvent.googleCalendarEvent"
-              (click)="addNewEventToBase()">Готово
-      </button>
-    </ng-template>
+    <button class="event-editor__button button"
+            *ngIf="editMode"
+            (click)="exitFromEditMode()">Отмена
+    </button>
+    <button class="event-editor__button button"
+            *ngIf="editMode && calendarEvent && !calendarEvent.googleCalendarEvent && calendarEvent.title"
+            [disabled]="eventEditorFormControl.invalid"
+            (click)="updateEvent(calendarEvent.id)">Сохранить
+    </button>
+    <button class="event-editor__button button"
+            *ngIf="!calendarEvent && !editMode"
+            [disabled]="eventEditorFormControl.invalid"
+            (click)="addNewEventToBase()">Готово
+    </button>
+
     <button type="button" class="event-editor__button button"
+            *ngIf="!editMode"
             [disabled]="!calendarEvent || calendarEvent.googleCalendarEvent"
             (click)="deleteCurrentEvent()">Удалить
     </button>

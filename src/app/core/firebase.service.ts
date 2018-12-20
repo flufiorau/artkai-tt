@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {CalendarEvent} from '@app/core/interfaces';
 import {map} from 'rxjs/operators';
@@ -11,6 +11,7 @@ export class FirebaseService {
 
   eventsCollection: AngularFirestoreCollection<CalendarEvent>;
   events: Observable<CalendarEvent[]>;
+  eventDoc: AngularFirestoreDocument<CalendarEvent>;
 
   constructor(public afs: AngularFirestore) {
   }
@@ -35,6 +36,11 @@ export class FirebaseService {
 
   deleteEvent(event: CalendarEvent) {
     this.afs.doc(`events/${event.id}`).delete();
+  }
+
+  updateEvent(event: CalendarEvent) {
+    this.eventDoc = this.afs.doc(`events/${event.id}`);
+    this.eventDoc.update(event);
   }
 
 }

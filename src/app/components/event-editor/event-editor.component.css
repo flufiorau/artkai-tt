@@ -79,8 +79,8 @@
   font-size: 10px;
   height: 225px;
   position: absolute;
-  padding: 18px 22px 18px 17px;
-  width: 200px;
+  padding: 18px;
+  width: 208px;
 }
 
 .event-editor__block_reverse-position {
@@ -119,17 +119,17 @@
 
 .button {
   margin: 0 1px 0 0;
-  width: 50px;
+  width: 55px;
   border-radius: 4px;
-  font-size: 9px;
+  font-size: 8px;
   line-height: 12px;
 }
 
 .event-editor__description{
-  margin: 7px 0 16px 0;
+  margin: 7px 7px 16px 0;
   padding: 5px;
   font-size: 8px;
   height: 80px;
-  width: 200px;
+  width: 195px;
 }
 

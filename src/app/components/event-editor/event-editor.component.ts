@@ -18,6 +18,7 @@ export class EventEditorComponent implements OnInit {
   upperCSSPosition: boolean;
   public error: string;
   eventEditorFormControl;
+  editMode: boolean;
 
   constructor(private afs: FirebaseService) {
     this.eventEditorFormControl = new FormGroup({
@@ -43,6 +44,28 @@ export class EventEditorComponent implements OnInit {
     this.closeEventEditor.emit();
   }
 
+  enterToEditMode(event: CalendarEvent) {
+    console.log(event);
+    this.editMode = true;
+    this.eventEditorFormControl.controls['title'].setValue(event.title);
+    if (event.members) {
+      this.eventEditorFormControl.controls['eventMembers'].setValue(event.members);
+    }
+    if (event.description) {
+      this.eventEditorFormControl.controls['eventDescription'].setValue(event.description);
+    }
+  }
+
+  exitFromEditMode() {
+    this.editMode = false;
+  }
+
+  updateEvent(id) {
+    this.afs.updateEvent(this.validateFormInput(this.eventEditorFormControl.value, id));
+    this.editMode = false;
+    this.closeEventEditorForm()
+    }
+
   closeEventEditorForm() {
     this.closeEventEditor.emit();
   }
@@ -66,14 +89,18 @@ export class EventEditorComponent implements OnInit {
   }
 
 
-  validateFormInput(eventEditorForm: CalendarEventFromForm): CalendarEvent {
+  validateFormInput(eventEditorForm: CalendarEventFromForm, id?): CalendarEvent {
     this.calendarEvent = {
       date: this.dateFromCell,
       title: eventEditorForm.title,
       description: eventEditorForm.eventDescription,
       members: eventEditorForm.eventMembers,
-      googleCalendarEvent: false
+      googleCalendarEvent: false,
     };
+    if (id) {
+      this.calendarEvent.id = id
+    }
     return this.calendarEvent;
   }
+
 }

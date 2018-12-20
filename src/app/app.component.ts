@@ -26,5 +26,4 @@ export class AppComponent implements OnInit, OnDestroy {
     this.googleCalendarService.signOut();
   }
 
-
 }
